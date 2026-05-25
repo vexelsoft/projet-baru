@@ -511,7 +511,6 @@ function updatePriceInfo(){
 }
 
 
-
 function updateTotalPrice(){
 
     const serviceId =
@@ -527,21 +526,30 @@ function updateTotalPrice(){
         x => x.id == serviceId
     );
 
-    if(service){
-
-        const total =
-        Math.ceil(
-            (service.price / 1000) * qty
-        );
+    if(!service){
 
         document.getElementById(
             'totalPriceBox'
         ).innerHTML =
+        '💰 Total Pembayaran : Rp 0';
 
-        '💰 Total Pembayaran : Rp ' +
-        total.toLocaleString('id-ID');
+        return;
 
     }
+
+    const total =
+    Math.ceil(
+        (Number(service.price) * qty) / 1000
+    );
+
+    document.getElementById(
+        'totalPriceBox'
+    ).innerHTML =
+
+    `
+    💰 Total Pembayaran :
+    <b>Rp ${total.toLocaleString('id-ID')}</b>
+    `;
 
 }
 
@@ -605,15 +613,22 @@ async function orderSosmed(){
 }
 
 document.getElementById('service')
-.addEventListener('change',()=>{
+.addEventListener(
+    'change',
+    ()=>{
 
-    updatePriceInfo();
-    updateTotalPrice();
+        updatePriceInfo();
+        updateTotalPrice();
 
-});
+    }
+);
 
-document.getElementById('quantity')
-.addEventListener('input',updateTotalPrice);
+document
+.getElementById('quantity')
+.addEventListener(
+    'input',
+    updateTotalPrice
+);
 
 loadServices();
 </script>
