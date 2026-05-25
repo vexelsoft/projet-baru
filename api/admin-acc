@@ -1,44 +1,8 @@
-let users=[
-{
-id:1,
-saldo:0
-}
-];
-
-let deposits=[];
-
 export default function handler(req,res){
 
-const {depositId}=req.body;
-
-const deposit=
-deposits.find(
-x=>x.id==depositId
-);
-
-if(!deposit){
-
 return res.json({
-status:false
-});
-
-}
-
-if(deposit.status==="success"){
-
-return res.json({
-status:false,
-message:"Sudah diproses"
-});
-
-}
-
-users[0].saldo+=deposit.nominal;
-
-deposit.status="success";
-
-res.json({
-status:true
+status:true,
+message:'Endpoint ACC admin siap dikembangkan'
 });
 
 }
