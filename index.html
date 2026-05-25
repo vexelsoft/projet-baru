@@ -311,6 +311,21 @@ Suntik Sosmed
 </a>
 </li>
 
+
+<li>
+<a href="#" onclick="switchTab('deposit')" id="nav-deposit" class="nav-link">
+<i class="fas fa-wallet"></i>
+Deposit
+</a>
+</li>
+
+<li>
+<a href="#" onclick="switchTab('profile')" id="nav-profile" class="nav-link">
+<i class="fas fa-user"></i>
+Profile
+</a>
+</li>
+
 </ul>
 </nav>
 
@@ -509,6 +524,84 @@ Order Sekarang
 </div>
 </div>
 
+
+<div id="deposit" style="display:none;">
+
+<div class="section-title">Deposit Saldo</div>
+
+<div class="food-card">
+<div class="card-details">
+
+<input type="number"
+id="depositNominal"
+class="input-box"
+placeholder="Masukkan nominal deposit">
+
+<select id="paymentMethod" class="input-box">
+<option>QRIS</option>
+<option>DANA</option>
+<option>GOPAY</option>
+<option>SHOPEEPAY</option>
+</select>
+
+<textarea
+id="buktiTransfer"
+class="input-box"
+style="height:120px"
+placeholder="Masukkan link / keterangan bukti transfer"></textarea>
+
+<button class="btn-add" onclick="kirimDeposit()">
+Kirim Deposit
+</button>
+
+</div>
+</div>
+
+</div>
+
+<div id="profile" style="display:none;">
+
+<div class="section-title">Profile User</div>
+
+<div class="food-card">
+<div class="card-details">
+
+<div class="menu-name">
+User VEXELSOFT
+</div>
+
+<div class="price-info">
+
+💰 Saldo :
+Rp <span id="saldoText">0</span>
+
+<br><br>
+
+🟢 Status :
+Active User
+
+</div>
+
+</div>
+</div>
+
+<div class="food-card" style="margin-top:20px;">
+<div class="card-details">
+
+<div class="menu-name">
+Riwayat Deposit
+</div>
+
+<div id="riwayatDeposit">
+Belum ada deposit
+</div>
+
+</div>
+</div>
+
+</div>
+
+
 </div>
 
 <script>
@@ -518,7 +611,7 @@ document.querySelector('.menu-overlay').classList.toggle('active');
 }
 
 function switchTab(type){
-['sewa','premium','sosmed'].forEach(id=>{
+['sewa','premium','sosmed','deposit','profile'].forEach(id=>{
 document.getElementById(id).style.display='none';
 });
 
@@ -535,6 +628,19 @@ let allServices = [];
 let groupedPlatforms = {};
 
 async function loadServices(){
+
+const serviceData =
+allServices.find(x=>x.id == service);
+
+const totalHarga =
+Math.ceil(
+(Number(quantity) / 1000) *
+Number(serviceData.price)
+);
+
+if(!cekSaldo(totalHarga)){
+return;
+}
 
 try{
 
@@ -693,6 +799,8 @@ const data = await response.json();
 
 if(data.status){
 
+potongSaldo(totalHarga);
+
 alert('✅ Order berhasil\n\nID : ' + data.data.order);
 
 }else{
@@ -751,6 +859,10 @@ document.getElementById('orderPopup').style.display='flex';
 
 function kirimOrder(){
 
+if(!cekSaldo(hargaDipilih)){
+return;
+}
+
 const linkGroup=document.getElementById('groupLink').value;
 const nomorText=document.getElementById('nomorList').value.trim();
 
@@ -778,7 +890,7 @@ return;
 
 }
 
-const nomor='6281234567890';
+const nomor='6285784085236';
 
 const pesan=`Halo Admin VEXELSOFT
 
@@ -788,6 +900,8 @@ const pesan=`Halo Admin VEXELSOFT
 
 📱 Daftar Nomor:
 ${daftarNomor.join('\n')}`;
+
+potongSaldo(hargaDipilih);
 
 window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,'_blank');
 
@@ -901,7 +1015,13 @@ return;
 
 }
 
-const admin='6281234567890';
+if(!cekSaldo(premiumHarga)){
+return;
+}
+
+potongSaldo(premiumHarga);
+
+const admin='6285784085236';
 
 const pesan =
 `Halo Admin VEXELSOFT
@@ -923,6 +1043,120 @@ window.open(
 tutupPremium();
 
 }
+
+
+
+
+
+
+function cekSaldo(harga){
+
+const saldo =
+Number(localStorage.getItem('saldo') || 0);
+
+if(saldo < Number(harga)){
+
+alert(
+'Saldo tidak mencukupi untuk membeli layanan ini.\n\nSilakan deposit terlebih dahulu agar saldo mencukupi.'
+);
+
+switchTab('deposit');
+
+return false;
+
+}
+
+return true;
+
+}
+
+function potongSaldo(harga){
+
+const saldo =
+Number(localStorage.getItem('saldo') || 0);
+
+localStorage.setItem(
+'saldo',
+saldo - Number(harga)
+);
+
+updateSaldo();
+
+}
+
+
+function updateSaldo(){
+
+const saldo =
+Number(localStorage.getItem('saldo') || 0);
+
+document.getElementById('saldoText')
+.innerHTML =
+saldo.toLocaleString('id-ID');
+
+}
+
+function kirimDeposit(){
+
+const nominal =
+document.getElementById('depositNominal').value;
+
+const metode =
+document.getElementById('paymentMethod').value;
+
+const bukti =
+document.getElementById('buktiTransfer').value;
+
+if(!nominal || !bukti){
+
+alert('Lengkapi data deposit');
+return;
+
+}
+
+const admin='6285784085236';
+
+const pesan =
+`Halo Admin VEXELSOFT
+
+💰 REQUEST DEPOSIT
+
+Nominal:
+Rp ${Number(nominal).toLocaleString('id-ID')}
+
+Metode:
+${metode}
+
+Bukti:
+${bukti}
+
+Mohon ACC saldo user.
+`;
+
+window.open(
+`https://wa.me/${admin}?text=${encodeURIComponent(pesan)}`,
+'_blank'
+);
+
+const riwayat =
+document.getElementById('riwayatDeposit');
+
+riwayat.innerHTML += `
+<hr>
+<p>
+Deposit Rp ${Number(nominal).toLocaleString('id-ID')}
+<br>
+Metode: ${metode}
+<br>
+Status: Pending ACC Developer
+</p>
+`;
+
+alert('Deposit berhasil dikirim');
+
+}
+
+updateSaldo();
 
 
 loadServices();
