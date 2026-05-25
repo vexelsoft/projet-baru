@@ -415,29 +415,35 @@ async function loadServices(){
 
         allServices = data.services;
 
-        const categories = [...new Set(allServices.map(item=>item.category))];
+        const platformMap = {
+            instagram:'📸 Instagram',
+            tiktok:'🎵 TikTok',
+            telegram:'✈️ Telegram',
+            facebook:'📘 Facebook',
+            youtube:'▶️ YouTube'
+        };
 
         const categoryButtons =
         document.getElementById('categoryButtons');
 
         categoryButtons.innerHTML = '';
 
-        categories.forEach(cat=>{
+        Object.keys(platformMap).forEach(platform=>{
 
-            let icon='📦';
+            const exists = allServices.some(item =>
+                item.category.toLowerCase().includes(platform)
+            );
 
-            if(cat.toLowerCase().includes('instagram')) icon='📸';
-            else if(cat.toLowerCase().includes('tiktok')) icon='🎵';
-            else if(cat.toLowerCase().includes('telegram')) icon='✈️';
-            else if(cat.toLowerCase().includes('facebook')) icon='📘';
-            else if(cat.toLowerCase().includes('youtube')) icon='▶️';
+            if(exists){
 
-            categoryButtons.innerHTML += `
-            <button
-            class="category-btn"
-            onclick="selectCategory('${cat}', this)">
-                ${icon} ${cat}
-            </button>`;
+                categoryButtons.innerHTML += `
+                <button
+                class="category-btn"
+                onclick="selectCategory('${platform}', this)">
+                    ${platformMap[platform]}
+                </button>`;
+            }
+
         });
 
     }catch(err){
@@ -472,7 +478,7 @@ function loadCategoryServices(){
 
     const filtered =
     allServices.filter(item =>
-        item.category == category
+        item.category.toLowerCase().includes(category.toLowerCase())
     );
 
     filtered.forEach(service => {
