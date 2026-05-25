@@ -1,24 +1,52 @@
-let deposits=[];
+import fs from "fs";
+import path from "path";
 
 export default function handler(req,res){
 
-if(req.method!=="POST"){
-return res.status(405).json({status:false});
-}
+const filePath=
+path.join(process.cwd(),
+"data",
+"deposits.json");
 
-const {nominal,metode,bukti}=req.body;
+const deposits=
+JSON.parse(
+fs.readFileSync(
+filePath,
+"utf8"
+)
+);
+
+if(req.method==="POST"){
+
+const {
+nominal,
+metode,
+bukti
+}=req.body;
 
 deposits.push({
+
 id:Date.now(),
 nominal,
 metode,
 bukti,
-status:'pending'
+status:"pending"
+
 });
 
-res.json({
-status:true,
-message:'Menunggu ACC admin'
+fs.writeFileSync(
+filePath,
+JSON.stringify(
+deposits,
+null,
+2
+)
+);
+
+return res.json({
+status:true
 });
+
+}
 
 }
