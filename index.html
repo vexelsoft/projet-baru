@@ -1101,6 +1101,7 @@ return;
 
 }
 
+try{
 const response=await fetch('/api/deposit',{
 method:'POST',
 headers:{'Content-Type':'application/json'},
@@ -1125,14 +1126,14 @@ Status: Pending ACC Developer
 
 alert(data.message || 'Deposit berhasil dikirim');
 
+}catch(err){
+alert('Gagal mengirim deposit');
+console.log(err);
+}
+
 }
 
 updateSaldo();
-
-
-loadServices();updateSaldo();
-
-
 loadServices();
 
 </script>
