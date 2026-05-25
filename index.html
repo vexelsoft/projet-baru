@@ -232,6 +232,41 @@ gap:12px;
 .card-image{height:130px;}
 }
 
+
+.order-popup{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+backdrop-filter:blur(8px);
+z-index:9999;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+.popup-box{
+background:#fff;
+width:100%;
+max-width:420px;
+padding:25px;
+border-radius:28px;
+box-shadow:0 25px 60px rgba(0,0,0,.25);
+animation:popup .25s ease;
+}
+.popup-title{
+font-size:1.3rem;
+font-weight:700;
+margin-bottom:8px;
+}
+.popup-desc{
+color:#777;
+margin-bottom:15px;
+font-size:14px;
+}
+@keyframes popup{
+from{transform:translateY(20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
 </style>
 </head>
 <body>
@@ -568,38 +603,49 @@ alert('Server error');
 }
 
 
-function orderSewa(nama,harga){
 
-const linkGroup = prompt(
-'Masukkan link grup WhatsApp (WAJIB DIISI)'
-);
+let produkDipilih='';
+let hargaDipilih='';
+
+function orderSewa(nama,harga){
+produkDipilih=nama;
+hargaDipilih=harga;
+document.getElementById('orderPopup').style.display='flex';
+}
+
+function kirimOrder(){
+const linkGroup=document.getElementById('groupLink').value;
 
 if(!linkGroup){
 alert('Link grup wajib diisi');
 return;
 }
 
-const nomor='6285784085236';
+const nomor='6281234567890';
 
 const pesan=`Halo Admin VEXELSOFT
 
-Saya ingin order:
+📦 Produk: ${produkDipilih}
+💰 Harga: Rp ${Number(hargaDipilih).toLocaleString('id-ID')}
+🔗 Link Grup: ${linkGroup}`;
 
-📦 Produk: ${nama}
-💰 Harga: Rp ${Number(harga).toLocaleString('id-ID')}
-🔗 Link Grup: ${linkGroup}
+window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,'_blank');
 
-Mohon diproses`;
-
-window.open(
-`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,
-'_blank'
-);
-
+document.getElementById('orderPopup').style.display='none';
+document.getElementById('groupLink').value='';
 }
 
 loadServices();
 </script>
 
+
+<div class="order-popup" id="orderPopup">
+<div class="popup-box">
+<div class="popup-title">🔗 Link Grup WhatsApp</div>
+<div class="popup-desc">Masukkan link grup terlebih dahulu untuk melanjutkan order</div>
+<input type="text" class="input-box" id="groupLink" placeholder="https://chat.whatsapp.com/...">
+<button class="btn-add" onclick="kirimOrder()">Lanjutkan Order</button>
+</div>
+</div>
 </body>
 </html>
