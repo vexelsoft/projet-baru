@@ -21,12 +21,6 @@ export default async function handler(req, res) {
             api_key
         );
 
-        /*
-        =========================
-        REQUEST SERVICES
-        =========================
-        */
-
         const response = await fetch(
 
             'https://fayupedia.id/api/services',
@@ -51,36 +45,39 @@ export default async function handler(req, res) {
 
         /*
         =========================
-        TAMBAH PROFIT 20%
+        FORMAT DATA
         =========================
         */
 
-        const services =
-        data.map(service => {
+        let services = [];
 
-            const originalPrice =
-            Number(service.price);
+        if(Array.isArray(data)){
 
-            const sellPrice =
-            Math.ceil(
-                originalPrice * 1.2
-            );
+            services =
+            data.map(service => {
 
-            return {
+                const price =
+                Math.ceil(
+                    Number(service.price) * 1.2
+                );
 
-                id: service.id,
+                return {
 
-                name: service.name,
+                    id: service.id,
 
-                min: service.min,
+                    name: service.name,
 
-                max: service.max,
+                    min: service.min,
 
-                price: sellPrice
+                    max: service.max,
 
-            };
+                    price: price
 
-        });
+                };
+
+            });
+
+        }
 
         return res.status(200).json({
 
@@ -96,7 +93,7 @@ export default async function handler(req, res) {
 
             status:false,
 
-            message:'Server Error'
+            message:err.message
 
         });
 
