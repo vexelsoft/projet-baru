@@ -2,24 +2,63 @@
 <html>
 <body>
 
-<h2>Panel Admin Deposit</h2>
+<h2>Deposit Pending</h2>
 
-<input
-id="depositId"
-placeholder="ID Deposit">
-
-<button onclick="acc()">
-ACC Deposit
-</button>
+<div id="list"></div>
 
 <script>
 
-async function acc(){
+async function loadDeposit(){
 
-const depositId=
+const response=
+await fetch('/api/deposits');
+
+const data=
+await response.json();
+
+let html='';
+
+data.data.forEach(item=>{
+
+html += `
+
+<div style="
+border:1px solid #ddd;
+padding:15px;
+margin-bottom:10px;
+">
+
+ID: ${item.id}<br>
+Nominal:
+Rp ${Number(item.nominal)
+.toLocaleString('id-ID')}<br>
+
+Metode:
+${item.metode}<br>
+
+Bukti:
+${item.bukti}<br><br>
+
+<button
+onclick="acc('${item.id}')">
+
+ACC Deposit
+
+</button>
+
+</div>
+
+`;
+
+});
+
 document.getElementById(
-'depositId'
-).value;
+'list'
+).innerHTML=html;
+
+}
+
+async function acc(id){
 
 const response=
 await fetch(
@@ -30,7 +69,7 @@ headers:{
 'Content-Type':'application/json'
 },
 body:JSON.stringify({
-depositId
+depositId:id
 })
 }
 );
@@ -40,7 +79,11 @@ await response.json();
 
 alert(data.message);
 
+loadDeposit();
+
 }
+
+loadDeposit();
 
 </script>
 
