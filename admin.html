@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Admin Deposit</title>
+<style>
+body{
+font-family:Arial;
+padding:20px;
+background:#f5f5f5;
+}
+.card{
+background:white;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+button{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2d1b18;
+color:white;
+}
+</style>
+</head>
 <body>
 
 <h2>Deposit Pending</h2>
 
-<div id="list"></div>
+<div id="depositList">
+Memuat...
+</div>
 
 <script>
 
@@ -16,31 +44,39 @@ await fetch('/api/deposits');
 const data=
 await response.json();
 
-let html='';
+const wrap=
+document.getElementById(
+'depositList'
+);
+
+if(!data.data?.length){
+
+wrap.innerHTML=
+'Tidak ada deposit';
+
+return;
+
+}
+
+wrap.innerHTML='';
 
 data.data.forEach(item=>{
 
-html += `
+wrap.innerHTML += `
 
-<div style="
-border:1px solid #ddd;
-padding:15px;
-margin-bottom:10px;
-">
+<div class="card">
 
-ID: ${item.id}<br>
-Nominal:
-Rp ${Number(item.nominal)
-.toLocaleString('id-ID')}<br>
+💰 Rp ${Number(item.nominal)
+.toLocaleString('id-ID')}
+<br><br>
 
-Metode:
-${item.metode}<br>
+🏦 ${item.metode}
+<br><br>
 
-Bukti:
-${item.bukti}<br><br>
+📝 ${item.bukti}
+<br><br>
 
-<button
-onclick="acc('${item.id}')">
+<button onclick="acc('${item.id}')">
 
 ACC Deposit
 
@@ -51,10 +87,6 @@ ACC Deposit
 `;
 
 });
-
-document.getElementById(
-'list'
-).innerHTML=html;
 
 }
 
