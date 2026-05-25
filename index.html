@@ -328,11 +328,11 @@ Solusi layanan bot WhatsApp dan layanan digital modern.
 <div class="section-title">Paket Bot</div>
 <div class="cards-grid">
 <div class="food-card">
-<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
+<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image" onclick="orderSewa('Paket Bot 1 Bulan','10000','Sewa bot WhatsApp aktif selama 1 bulan')">
 <div class="card-details">
 <div class="menu-name">Paket Bot 1 Bulan</div>
 <p>Sewa bot WhatsApp selama 1 bulan.</p><br>
-<button class="btn-add" onclick="orderSewa('Paket Bot 1 Bulan','10000')">Rp 10.000</button>
+<button class="btn-add" onclick="orderSewa('Paket Bot 1 Bulan','10000','Sewa bot WhatsApp aktif selama 1 bulan')">Rp 10.000</button>
 </div>
 </div>
 </div>
@@ -342,11 +342,11 @@ Solusi layanan bot WhatsApp dan layanan digital modern.
 <div class="section-title">Group Premium</div>
 <div class="cards-grid">
 <div class="food-card">
-<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
+<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image" onclick="orderSewa('Group Premium 1 Bulan','25000','Akses grup premium selama 1 bulan')">
 <div class="card-details">
 <div class="menu-name">Group Premium 1 Bulan</div>
 <p>Paket premium group selama 1 bulan.</p><br>
-<button class="btn-add" onclick="orderSewa('Group Premium 1 Bulan','25000')">Rp 25.000</button>
+<button class="btn-add" onclick="orderSewa('Group Premium 1 Bulan','25000','Akses grup premium selama 1 bulan')">Rp 25.000</button>
 </div>
 </div>
 </div>
@@ -605,11 +605,11 @@ alert('Server error');
 
 
 let produkDipilih='';
-let hargaDipilih='';
+let hargaDipilih=''; let deskripsiDipilih='';
 
-function orderSewa(nama,harga){
+function orderSewa(nama,harga,desk){
 produkDipilih=nama;
-hargaDipilih=harga;
+hargaDipilih=harga;deskripsiDipilih=desk;document.getElementById('deskProduk').innerHTML='📝 '+desk;
 document.getElementById('orderPopup').style.display='flex';
 }
 
@@ -642,7 +642,7 @@ loadServices();
 <div class="order-popup" id="orderPopup">
 <div class="popup-box">
 <div class="popup-title">🔗 Link Grup WhatsApp</div>
-<div class="popup-desc">Masukkan link grup terlebih dahulu untuk melanjutkan order</div>
+<div id="deskProduk" class="popup-desc"></div><div class="popup-desc">Masukkan link grup terlebih dahulu untuk melanjutkan order</div>
 <input type="text" class="input-box" id="groupLink" placeholder="https://chat.whatsapp.com/...">
 <button class="btn-add" onclick="kirimOrder()">Lanjutkan Order</button>
 </div>
