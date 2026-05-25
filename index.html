@@ -10,493 +10,530 @@
 
 <style>
 :root{
---bg-color:#fdfbf7;
---primary-brown:#3e2723;
---accent-gold:#c5a065;
+    --bg-color:#fdfbf7;
+    --primary-dark:#2d1b18;
+    --primary-brown:#3e2723;
+    --accent-gold:#c5a065;
+    --shadow-soft:0 10px 40px -10px rgba(62,39,35,.08);
+    --shadow-hover:0 20px 50px -10px rgba(62,39,35,.15);
 }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Plus Jakarta Sans',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-background:var(--bg-color);
-overflow-x:hidden;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:var(--bg-color);
+    overflow-x:hidden;
+}
+
+.mobile-header{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:70px;
+    background:rgba(62,39,35,.98);
+    z-index:1001;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.mobile-logo{
+    color:#fff;
+    font-size:1.2rem;
+    font-family:'Playfair Display',serif;
+}
+
+.menu-toggle-btn{
+    border:none;
+    background:none;
+    color:#fff;
+    font-size:1.5rem;
 }
 
 .sidebar{
-position:fixed;
-left:0;
-top:0;
-width:280px;
-height:100vh;
-background:rgba(62,39,35,.98);
-padding:2rem;
-z-index:1000;
+    position:fixed;
+    top:0;
+    left:0;
+    width:280px;
+    height:100vh;
+    background:rgba(62,39,35,.98);
+    padding:2rem;
+    z-index:1002;
+    transition:.3s;
+}
+
+.logo-area{
+    text-align:center;
+    margin-bottom:3rem;
+}
+
+.logo-icon{
+    color:var(--accent-gold);
+    font-size:2.5rem;
+    margin-bottom:10px;
 }
 
 .logo-text{
-color:#fff;
-font-size:1.6rem;
-font-family:'Playfair Display',serif;
-margin-bottom:2rem;
+    color:#fff;
+    font-size:1.6rem;
+    font-family:'Playfair Display',serif;
 }
 
 .logo-text span{
-color:var(--accent-gold);
+    color:var(--accent-gold);
 }
 
 .nav-menu{
-list-style:none;
-display:flex;
-flex-direction:column;
-gap:10px;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
 .nav-link{
-display:flex;
-align-items:center;
-gap:12px;
-padding:15px;
-border-radius:14px;
-text-decoration:none;
-color:#fff;
-background:rgba(255,255,255,.05);
+    text-decoration:none;
+    color:rgba(255,255,255,.7);
+    padding:15px 18px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    transition:.3s;
 }
 
-.nav-link.active{
-background:rgba(255,255,255,.12);
+.nav-link:hover,.nav-link.active{
+    background:rgba(255,255,255,.1);
+    color:#fff;
 }
 
 .main-wrapper{
-margin-left:280px;
-padding:2rem;
+    margin-left:280px;
+    padding:2rem 3rem;
 }
 
 .hero-banner{
-background:
-linear-gradient(to bottom, rgba(0,0,0,.6), rgba(45,27,24,.8)),
-url('https://cdn.odzre.my.id/ln2.jpg');
-background-size:cover;
-background-position:center;
-padding:4rem 3rem;
-border-radius:30px;
-color:#fff;
-margin-bottom:3rem;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,.6), rgba(45,27,24,.8)),
+    url('https://cdn.odzre.my.id/ln2.jpg');
+    background-size:cover;
+    background-position:center;
+    border-radius:30px;
+    padding:4rem 3rem;
+    color:#fff;
+    margin-bottom:3rem;
 }
 
 .hero-title{
-font-size:3rem;
-font-family:'Playfair Display',serif;
-margin-bottom:15px;
+    font-size:3rem;
+    font-family:'Playfair Display',serif;
+    margin-bottom:15px;
+}
+
+.hero-subtitle{
+    opacity:.9;
+    line-height:1.7;
 }
 
 .section-title{
-font-size:2rem;
-margin-bottom:1.5rem;
-font-family:'Playfair Display',serif;
-}
-
-.menu-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-gap:20px;
-margin-bottom:3rem;
+    font-size:2rem;
+    margin-bottom:1.5rem;
+    font-family:'Playfair Display',serif;
 }
 
 .food-card{
-background:#fff;
-border-radius:24px;
-overflow:hidden;
-box-shadow:0 10px 40px -10px rgba(62,39,35,.08);
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:var(--shadow-soft);
+    transition:.3s;
+    max-width:650px;
+    margin-bottom:20px;
 }
 
-.card-img-box{
-height:170px;
-overflow:hidden;
-}
-
-.card-img-box img{
-width:100%;
-height:100%;
-object-fit:cover;
+.food-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-hover);
 }
 
 .card-details{
-padding:1.5rem;
+    padding:1.5rem;
 }
 
 .menu-name{
-font-weight:700;
-margin-bottom:10px;
-}
-
-.price{
-color:var(--accent-gold);
-font-weight:700;
-font-size:1.1rem;
-margin-top:10px;
-}
-
-.category-buttons{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-bottom:15px;
-}
-
-.category-btn{
-border:none;
-padding:10px 15px;
-border-radius:12px;
-background:#eee;
-cursor:pointer;
-font-weight:700;
-}
-
-.category-btn.active{
-background:var(--primary-brown);
-color:#fff;
+    font-size:1.1rem;
+    font-weight:700;
+    margin-bottom:15px;
 }
 
 .input-box{
-width:100%;
-height:50px;
-border:1px solid #ddd;
-border-radius:14px;
-padding:12px;
-margin-bottom:15px;
-}
-
-.price-info{
-background:#f7f7f7;
-padding:15px;
-border-radius:14px;
-margin-bottom:15px;
-line-height:1.7;
+    width:100%;
+    height:50px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    padding:12px;
+    margin-bottom:15px;
+    font-size:14px;
+    outline:none;
 }
 
 .btn-add{
-width:100%;
-height:50px;
-border:none;
-border-radius:14px;
-background:var(--primary-brown);
-color:#fff;
-font-weight:700;
-cursor:pointer;
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary-brown);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.price-info{
+    background:#f7f7f7;
+    padding:15px;
+    border-radius:14px;
+    margin-bottom:15px;
+    font-size:14px;
+    color:#555;
+    line-height:1.7;
+}
+
+.menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:1000;
+    display:none;
+}
+
+.menu-overlay.active{
+    display:block;
 }
 
 @media(max-width:992px){
-.sidebar{
-position:relative;
-width:100%;
-height:auto;
-}
-.main-wrapper{
-margin-left:0;
-}
+    .mobile-header{display:flex}
+    .sidebar{left:-300px}
+    .sidebar.active{left:0}
+    .main-wrapper{
+        margin-left:0;
+        padding:1.5rem;
+        padding-top:100px;
+    }
+    .hero-banner{padding:3rem 1.5rem}
+    .hero-title{font-size:2rem}
 }
 </style>
 </head>
 <body>
 
-<nav class="sidebar">
+<div class="menu-overlay" onclick="toggleMenu()"></div>
 
-<div class="logo-text">
-VEXEL <br>
-<span>SOFT</span>
+<div class="mobile-header">
+    <div class="mobile-logo">VEXELSOFT</div>
+    <button class="menu-toggle-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
 </div>
 
-<ul class="nav-menu">
+<nav class="sidebar" id="sidebar">
+    <div class="logo-area">
+        <i class="fas fa-robot logo-icon"></i>
+        <div class="logo-text">
+            VEXEL <br><span>SOFT</span>
+        </div>
+    </div>
 
-<li>
-<a href="#" class="nav-link active" onclick="switchTab('sewa')" id="nav-sewa">
-<i class="fas fa-server"></i>
-Sewa Bot
-</a>
-</li>
+    <ul class="nav-menu">
+        <li>
+            <a href="#" onclick="switchTab('sewa')" id="nav-sewa" class="nav-link active">
+                <i class="fas fa-server"></i>
+                Sewa Bot
+            </a>
+        </li>
 
-<li>
-<a href="#" class="nav-link" onclick="switchTab('premium')" id="nav-premium">
-<i class="fas fa-crown"></i>
-Premium User
-</a>
-</li>
+        <li>
+            <a href="#" onclick="switchTab('premium')" id="nav-premium" class="nav-link">
+                <i class="fas fa-crown"></i>
+                Premium User
+            </a>
+        </li>
 
-<li>
-<a href="#" class="nav-link" onclick="switchTab('sosmed')" id="nav-sosmed">
-<i class="fas fa-rocket"></i>
-Suntik Sosmed
-</a>
-</li>
+        <li>
+            <a href="#" onclick="switchTab('group')" id="nav-group" class="nav-link">
+                <i class="fas fa-users"></i>
+                Paket Group
+            </a>
+        </li>
 
-</ul>
-
+        <li>
+            <a href="#" onclick="switchTab('sosmed')" id="nav-sosmed" class="nav-link">
+                <i class="fas fa-rocket"></i>
+                Suntik Sosmed
+            </a>
+        </li>
+    </ul>
 </nav>
 
 <div class="main-wrapper">
 
-<div class="hero-banner">
-<h1 class="hero-title">VEXELSOFT STORE</h1>
-<p>Solusi layanan bot WhatsApp dan suntik sosial media otomatis.</p>
-</div>
+    <div class="hero-banner">
+        <h1 class="hero-title">VEXELSOFT STORE</h1>
+        <p class="hero-subtitle">
+            Solusi layanan bot WhatsApp dan layanan digital modern.
+        </p>
+    </div>
 
-<div id="sewa">
+    <div id="sewa">
+        <div class="section-title">Paket Bot</div>
 
-<div class="section-title">Paket Sewa Bot</div>
+        <div class="food-card">
+            <div class="card-details">
+                <div class="menu-name">Paket Bot 1 Bulan</div>
+                <p>Sewa bot WhatsApp selama 1 bulan.</p><br>
+                <button class="btn-add">Rp 10.000</button>
+            </div>
+        </div>
+    </div>
 
-<div class="menu-grid">
+    <div id="premium" style="display:none;">
+        <div class="section-title">Premium User</div>
 
-<div class="food-card">
-<div class="card-img-box">
-<img src="https://cdn.yupra.my.id/yp/nfuakqql.jpg">
-</div>
-<div class="card-details">
-<div class="menu-name">Paket Hemat 1 Bulan</div>
-<div>Bot WhatsApp aktif selama 1 bulan.</div>
-<div class="price">Rp 10.000</div>
-</div>
-</div>
+        <div class="food-card">
+            <div class="card-details">
+                <div class="menu-name">Premium User 1 Bulan</div>
+                <p>Premium user selama 1 bulan.</p><br>
+                <button class="btn-add">Rp 5.000</button>
+            </div>
+        </div>
+    </div>
 
-<div class="food-card">
-<div class="card-img-box">
-<img src="https://cdn.yupra.my.id/yp/nfuakqql.jpg">
-</div>
-<div class="card-details">
-<div class="menu-name">Paket Premium 1 Tahun</div>
-<div>Free premium user dan fitur lengkap.</div>
-<div class="price">Rp 100.000</div>
-</div>
-</div>
+    <div id="group" style="display:none;">
+        <div class="section-title">Paket Group</div>
 
-</div>
-</div>
+        <div class="food-card">
+            <div class="card-details">
+                <div class="menu-name">Group Premium 1 Bulan</div>
+                <p>Paket premium group selama 1 bulan.</p><br>
+                <button class="btn-add">Rp 25.000</button>
+            </div>
+        </div>
+    </div>
 
-<div id="premium" style="display:none;">
+    <div id="sosmed" style="display:none;">
+        <div class="section-title">Suntik Sosmed</div>
 
-<div class="section-title">Premium User</div>
+        <div class="food-card">
+            <div class="card-details">
 
-<div class="menu-grid">
+                <div class="menu-name">
+                    Order Layanan Sosmed
+                </div>
 
-<div class="food-card">
-<div class="card-img-box">
-<img src="https://cdn.yupra.my.id/yp/nfuakqql.jpg">
-</div>
-<div class="card-details">
-<div class="menu-name">Premium User 1 Bulan</div>
-<div>Akses fitur premium bot WhatsApp.</div>
-<div class="price">Rp 5.000</div>
-</div>
-</div>
+                <select id="category" class="input-box">
+                    <option value="">Pilih Kategori</option>
+                </select>
 
-</div>
+                <select id="service" class="input-box">
+                    <option value="">Pilih Layanan</option>
+                </select>
 
-</div>
+                <div id="priceInfo" class="price-info">
+                    Pilih layanan terlebih dahulu
+                </div>
 
-<div id="sosmed" style="display:none;">
+                <input type="text" id="target" class="input-box" placeholder="Masukkan username / link">
 
-<div class="section-title">Suntik Sosmed</div>
+                <input type="number" id="quantity" class="input-box" placeholder="Jumlah order">
 
-<div class="food-card">
-<div class="card-details">
+                <button class="btn-add" onclick="orderSosmed()">
+                    <i class="fas fa-cart-shopping"></i>
+                    Order Sekarang
+                </button>
 
-<h3 style="margin-bottom:15px;">
-Order Layanan Sosmed
-</h3>
-
-<div id="categoryButtons" class="category-buttons"></div>
-
-<select id="service" class="input-box">
-<option value="">Pilih layanan</option>
-</select>
-
-<div id="priceInfo" class="price-info">
-Pilih layanan terlebih dahulu
-</div>
-
-<input type="text" id="target" class="input-box" placeholder="Masukkan username / link">
-
-<input type="number" id="quantity" class="input-box" placeholder="Jumlah order">
-
-<div id="totalPrice" class="price-info">
-Total Pembayaran : Rp 0
-</div>
-
-<button class="btn-add" onclick="orderSosmed()">
-Order Sekarang
-</button>
-
-</div>
-</div>
-
-</div>
-
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+function toggleMenu(){
+    document.getElementById('sidebar').classList.toggle('active');
+    document.querySelector('.menu-overlay').classList.toggle('active');
+}
 
 function switchTab(type){
+    ['sewa','premium','group','sosmed'].forEach(id=>{
+        document.getElementById(id).style.display='none';
+    });
 
-document.getElementById('sewa').style.display='none';
-document.getElementById('premium').style.display='none';
-document.getElementById('sosmed').style.display='none';
+    document.getElementById(type).style.display='block';
 
-document.getElementById(type).style.display='block';
+    document.querySelectorAll('.nav-link').forEach(el=>{
+        el.classList.remove('active');
+    });
 
-document.querySelectorAll('.nav-link').forEach(el=>{
-el.classList.remove('active');
-});
-
-document.getElementById('nav-'+type).classList.add('active');
-
+    document.getElementById('nav-'+type).classList.add('active');
 }
 
 let allServices = [];
-let groupedPlatforms = {};
 
 async function loadServices(){
+    try{
+        const response = await fetch('/api/services');
+        const data = await response.json();
 
-try{
+        if(!data.status){
+            alert(data.message || 'Gagal memuat layanan');
+            return;
+        }
 
-const response = await fetch('/api/services');
-const data = await response.json();
+        allServices = data.services;
 
-if(!data.status){
-alert('Gagal load layanan');
-return;
+        const categories = [...new Set(allServices.map(item=>item.category))];
+
+        const categorySelect = document.getElementById('category');
+
+        categorySelect.innerHTML =
+        '<option value="">Pilih Kategori</option>';
+
+        categories.forEach(cat=>{
+
+            let icon='📦';
+
+            if(cat.toLowerCase().includes('instagram')) icon='📸';
+            else if(cat.toLowerCase().includes('tiktok')) icon='🎵';
+            else if(cat.toLowerCase().includes('telegram')) icon='✈️';
+            else if(cat.toLowerCase().includes('facebook')) icon='📘';
+            else if(cat.toLowerCase().includes('youtube')) icon='▶️';
+
+            categorySelect.innerHTML += `
+            <option value="${cat}">
+                ${icon} ${cat}
+            </option>`;
+        });
+
+    }catch(err){
+        alert('Server error');
+    }
 }
 
-allServices = data.services;
-groupedPlatforms = {};
+function loadCategoryServices(){
 
-allServices.forEach(service=>{
+    const category =
+    document.getElementById('category').value;
 
-let category = service.category || 'Other';
-let platform = category.split(' ')[0].trim();
+    const serviceSelect =
+    document.getElementById('service');
 
-if(!groupedPlatforms[platform]){
-groupedPlatforms[platform] = [];
-}
+    serviceSelect.innerHTML =
+    '<option value="">Pilih Layanan</option>';
 
-groupedPlatforms[platform].push(service);
+    const filtered =
+    allServices.filter(item =>
+        item.category == category
+    );
 
-});
+    filtered.forEach(service => {
 
-const categoryButtons =
-document.getElementById('categoryButtons');
+        serviceSelect.innerHTML += `
+        <option value="${service.id}">
+            ${service.name}
+            - Rp ${Number(service.price).toLocaleString('id-ID')}
+        </option>`;
 
-categoryButtons.innerHTML='';
-
-Object.keys(groupedPlatforms).forEach(platform=>{
-
-categoryButtons.innerHTML += `
-<button class="category-btn"
-onclick="selectCategory('${platform}', this)">
-${platform}
-</button>`;
-
-});
-
-}catch(err){
-
-alert('Server Error');
-
-}
-
-}
-
-function selectCategory(category, el){
-
-document.querySelectorAll('.category-btn')
-.forEach(btn=>{
-btn.classList.remove('active');
-});
-
-el.classList.add('active');
-
-const serviceSelect =
-document.getElementById('service');
-
-serviceSelect.innerHTML =
-'<option value="">Pilih layanan</option>';
-
-groupedPlatforms[category].forEach(service=>{
-
-serviceSelect.innerHTML += `
-<option value="${service.id}">
-${service.name} - Rp ${service.price.toLocaleString('id-ID')}
-</option>`;
-
-});
-
+    });
 }
 
 function updatePriceInfo(){
 
-const serviceId =
-document.getElementById('service').value;
+    const serviceId =
+    document.getElementById('service').value;
 
-const service =
-allServices.find(x=>x.id == serviceId);
+    const service =
+    allServices.find(
+        x => x.id == serviceId
+    );
 
-const qty =
-parseInt(document.getElementById('quantity').value || 0);
+    if(service){
 
-if(service){
-
-document.getElementById('priceInfo').innerHTML = `
-<b>${service.name}</b><br><br>
-📦 ${service.category}<br>
-📉 Min : ${service.min}<br>
-📈 Max : ${service.max}<br>
-💰 Harga/1000 : Rp ${service.price.toLocaleString('id-ID')}
-`;
-
-const total = Math.ceil((qty / 1000) * service.price);
-
-document.getElementById('totalPrice').innerHTML =
-'Total Pembayaran : Rp ' +
-total.toLocaleString('id-ID');
-
+        document.getElementById('priceInfo').innerHTML = `
+        <b>${service.name}</b><br><br>
+        📦 Kategori : ${service.category}<br>
+        📉 Min : ${service.min}<br>
+        📈 Max : ${service.max}<br>
+        💰 Harga : Rp ${Number(service.price).toLocaleString('id-ID')}<br>
+        ♻️ Refill : ${service.refill ? 'Yes' : 'No'}<br><br>
+        📝 ${service.description || '-'}
+        `;
+    }
 }
-
-}
-
-document.getElementById('service')
-.addEventListener('change', updatePriceInfo);
-
-document.getElementById('quantity')
-.addEventListener('input', updatePriceInfo);
 
 async function orderSosmed(){
 
-const service =
-document.getElementById('service').value;
+    const service =
+    document.getElementById('service').value;
 
-const target =
-document.getElementById('target').value;
+    const target =
+    document.getElementById('target').value;
 
-const quantity =
-document.getElementById('quantity').value;
+    const quantity =
+    document.getElementById('quantity').value;
 
-if(!service || !target || !quantity){
+    if(!service || !target || !quantity){
+        alert('Lengkapi data');
+        return;
+    }
 
-alert('Lengkapi data');
+    try{
 
-return;
+        const response =
+        await fetch('/api/order',{
 
+            method:'POST',
+
+            headers:{
+                'Content-Type':'application/json'
+            },
+
+            body:JSON.stringify({
+                service,
+                target,
+                quantity
+            })
+        });
+
+        const data = await response.json();
+
+        if(data.status){
+
+            alert(
+                '✅ Order berhasil\\n\\nID Order : ' +
+                data.data.order
+            );
+
+        }else{
+
+            alert(
+                data.message || 'Order gagal'
+            );
+
+        }
+
+    }catch(err){
+
+        alert('Server error');
+
+    }
 }
 
-alert('Order berhasil');
+document.getElementById('category')
+.addEventListener('change',loadCategoryServices);
 
-}
+document.getElementById('service')
+.addEventListener('change',updatePriceInfo);
 
 loadServices();
-
 </script>
 
 </body>
