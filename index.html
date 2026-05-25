@@ -311,6 +311,21 @@ Suntik Sosmed
 </a>
 </li>
 
+
+<li>
+<a href="#" onclick="switchTab('deposit')" id="nav-deposit" class="nav-link">
+<i class="fas fa-wallet"></i>
+Deposit
+</a>
+</li>
+
+<li>
+<a href="#" onclick="switchTab('profile')" id="nav-profile" class="nav-link">
+<i class="fas fa-user"></i>
+Profile
+</a>
+</li>
+
 </ul>
 </nav>
 
@@ -323,44 +338,158 @@ Solusi layanan bot WhatsApp dan layanan digital modern.
 </p>
 </div>
 
+
 <div id="sewa">
 
-<div class="section-title">Paket Hemat</div>
-<div class="cards-grid">
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Paket Hemat 1 Tahun','80000','Sewa bot 1 Tahun')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Tahun</div><p>Rp 80.000</p></div></div>
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Paket Hemat 3 Bulan','30000','Sewa bot 3 Bulan')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">3 Bulan</div><p>Rp 30.000</p></div></div>
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Paket Hemat 2 Bulan','20000','Sewa bot 2 Bulan')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">2 Bulan</div><p>Rp 20.000</p></div></div>
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Paket Hemat 1 Bulan','10000','Sewa bot 1 Bulan')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Bulan</div><p>Rp 10.000</p></div></div>
+<script>
+
+const DATA_SEWA = {
+
+hemat:{
+title:'Paket Hemat',
+items:[
+{
+nama:'1 Tahun',
+harga:'80000',
+deskripsi:'Sewa bot 1 Tahun',
+nomor:0
+},
+{
+nama:'3 Bulan',
+harga:'30000',
+deskripsi:'Sewa bot 3 Bulan',
+nomor:0
+},
+{
+nama:'2 Bulan',
+harga:'20000',
+deskripsi:'Sewa bot 2 Bulan',
+nomor:0
+},
+{
+nama:'1 Bulan',
+harga:'10000',
+deskripsi:'Sewa bot 1 Bulan',
+nomor:0
+},
+{
+nama:'15 Hari',
+harga:'5000',
+deskripsi:'Sewa bot 15 Hari',
+nomor:0
+}
+]
+},
+
+reguler:{
+title:'Paket Reguler',
+items:[
+{
+nama:'1 Tahun + Prem 15',
+harga:'100000',
+deskripsi:'FREE PREMIUM USER UNTUK 15 ORANG',
+nomor:15
+},
+{
+nama:'3 Bulan + Prem 8',
+harga:'35000',
+deskripsi:'FREE PREMIUM USER UNTUK 8 ORANG',
+nomor:8
+},
+{
+nama:'2 Bulan + Prem 5',
+harga:'25000',
+deskripsi:'FREE PREMIUM USER UNTUK 5 ORANG',
+nomor:5
+},
+{
+nama:'1 Bulan + Prem 3',
+harga:'15000',
+deskripsi:'FREE PREMIUM USER UNTUK 3 ORANG/NOMOR',
+nomor:3
+}
+]
+},
+
+group:{
+title:'Grup Premium',
+items:[
+{
+nama:'1 Tahun Group',
+harga:'130000',
+deskripsi:' FREE MONEY 50JT UNTUK 15 ORANG',
+nomor:15
+},
+{
+nama:'2 Bulan Group',
+harga:'35000',
+deskripsi:'FREE MONEY 8JT UNTUK 5 ORANG',
+nomor:5
+},
+{
+nama:'1 Bulan Group',
+harga:'25000',
+deskripsi:'FREE MONEY 5JT UNTUK 5 ORANG',
+nomor:5
+},
+{
+nama:'15 Hari Group',
+harga:'20000',
+deskripsi:'Group Premium 15 Hari',
+nomor:0
+}
+]
+}
+
+};
+
+</script>
+
+<div id="sewaContent"></div>
+
 </div>
 
-<div class="section-title" style="margin-top:30px">Paket Premium</div>
-<div class="cards-grid">
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Premium 1 Tahun','100000','1 Tahun + Prem 15 Orang')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Tahun + Prem 15</div><p>Rp 100.000</p></div></div>
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Premium 3 Bulan','35000','3 Bulan + Prem 8 Orang')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">3 Bulan + Prem 8</div><p>Rp 35.000</p></div></div>
-</div>
-
-<div class="section-title" style="margin-top:30px">Sewa & Premium Group</div>
-<div class="cards-grid">
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Group 1 Tahun','130000','Money 50JT + 15 Orang')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Tahun Group</div><p>Rp 130.000</p></div></div>
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Group 1 Bulan','25000','Money 5JT + 5 Orang')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Bulan Group</div><p>Rp 25.000</p></div></div>
-</div>
-
-</div>
 <div id="premium" style="display:none;">
+
 <div class="section-title">Premium User</div>
+
 <div class="cards-grid">
-<div class="food-card">
-<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
+
+<div class="food-card"
+style="cursor:pointer;width:100%"
+onclick="orderPremium(
+'Premium User 1 Bulan',
+'5000',
+'Premium User 1 Bulan'
+)">
+
+<img src="https://cdn.odzre.my.id/ln2.jpg"
+class="card-image">
+
 <div class="card-details">
-<div class="menu-name">Premium User 1 Bulan</div>
-<p>Premium user selama 1 bulan.</p><br>
-<button class="btn-add">Rp 5.000</button>
-</div>
-</div>
-</div>
+
+<div class="menu-name">
+Premium User 1 Bulan
 </div>
 
-<div id="sosmed" style="display:none;">
+<p>
+Premium user selama 1 bulan
+</p><br>
+
+<button class="btn-add">
+Rp 5.000
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="sosmed"
+ style="display:none;">
 <div class="section-title">Suntik Sosmed</div>
 
 <div class="food-card">
@@ -395,6 +524,84 @@ Order Sekarang
 </div>
 </div>
 
+
+<div id="deposit" style="display:none;">
+
+<div class="section-title">Deposit Saldo</div>
+
+<div class="food-card">
+<div class="card-details">
+
+<input type="number"
+id="depositNominal"
+class="input-box"
+placeholder="Masukkan nominal deposit">
+
+<select id="paymentMethod" class="input-box">
+<option>QRIS</option>
+<option>DANA</option>
+<option>GOPAY</option>
+<option>SHOPEEPAY</option>
+</select>
+
+<textarea
+id="buktiTransfer"
+class="input-box"
+style="height:120px"
+placeholder="Masukkan link / keterangan bukti transfer"></textarea>
+
+<button class="btn-add" onclick="kirimDeposit()">
+Kirim Deposit
+</button>
+
+</div>
+</div>
+
+</div>
+
+<div id="profile" style="display:none;">
+
+<div class="section-title">Profile User</div>
+
+<div class="food-card">
+<div class="card-details">
+
+<div class="menu-name">
+User VEXELSOFT
+</div>
+
+<div class="price-info">
+
+💰 Saldo :
+Rp <span id="saldoText">0</span>
+
+<br><br>
+
+🟢 Status :
+Active User
+
+</div>
+
+</div>
+</div>
+
+<div class="food-card" style="margin-top:20px;">
+<div class="card-details">
+
+<div class="menu-name">
+Riwayat Deposit
+</div>
+
+<div id="riwayatDeposit">
+Belum ada deposit
+</div>
+
+</div>
+</div>
+
+</div>
+
+
 </div>
 
 <script>
@@ -404,7 +611,7 @@ document.querySelector('.menu-overlay').classList.toggle('active');
 }
 
 function switchTab(type){
-['sewa','premium','sosmed'].forEach(id=>{
+['sewa','premium','sosmed','deposit','profile'].forEach(id=>{
 document.getElementById(id).style.display='none';
 });
 
@@ -421,6 +628,19 @@ let allServices = [];
 let groupedPlatforms = {};
 
 async function loadServices(){
+
+const serviceData =
+allServices.find(x=>x.id == service);
+
+const totalHarga =
+Math.ceil(
+(Number(quantity) / 1000) *
+Number(serviceData.price)
+);
+
+if(!cekSaldo(totalHarga)){
+return;
+}
 
 try{
 
@@ -579,6 +799,8 @@ const data = await response.json();
 
 if(data.status){
 
+potongSaldo(totalHarga);
+
 alert('✅ Order berhasil\n\nID : ' + data.data.order);
 
 }else{
@@ -598,34 +820,94 @@ alert('Server error');
 
 
 let produkDipilih='';
-let hargaDipilih=''; let deskripsiDipilih='';
+let hargaDipilih='';
+let deskripsiDipilih='';
+let jumlahNomorWajib=0;
 
-function orderSewa(nama,harga,desk){
+function orderSewa(nama,harga,desk,jumlah=0){
+
 produkDipilih=nama;
-hargaDipilih=harga;deskripsiDipilih=desk;document.getElementById('deskProduk').innerHTML='📝 '+desk;
+hargaDipilih=harga;
+deskripsiDipilih=desk;
+jumlahNomorWajib=jumlah;
+
+document.getElementById('deskProduk').innerHTML='📝 '+desk;
+
+const nomorBox =
+document.getElementById('nomorList');
+
+const infoNomor =
+document.getElementById('infoNomor');
+
+if(jumlah > 0){
+
+nomorBox.style.display = 'block';
+infoNomor.style.display = 'block';
+
+infoNomor.innerHTML =
+'Wajib mengisi ' + jumlah + ' nomor';
+
+}else{
+
+nomorBox.style.display = 'none';
+infoNomor.style.display = 'none';
+
+}
+
 document.getElementById('orderPopup').style.display='flex';
 }
 
 function kirimOrder(){
+
+if(!cekSaldo(hargaDipilih)){
+return;
+}
+
 const linkGroup=document.getElementById('groupLink').value;
+const nomorText=document.getElementById('nomorList').value.trim();
 
 if(!linkGroup){
 alert('Link grup wajib diisi');
 return;
 }
 
-const nomor='6281234567890';
+let daftarNomor=[];
+
+if(nomorText){
+
+daftarNomor=nomorText
+.split('\n')
+.map(x=>x.trim())
+.filter(x=>x);
+
+}
+
+if(jumlahNomorWajib > 0 &&
+daftarNomor.length != jumlahNomorWajib){
+
+alert('Wajib mengisi ' + jumlahNomorWajib + ' nomor');
+return;
+
+}
+
+const nomor='6285784085236';
 
 const pesan=`Halo Admin VEXELSOFT
 
 📦 Produk: ${produkDipilih}
 💰 Harga: Rp ${Number(hargaDipilih).toLocaleString('id-ID')}
-🔗 Link Grup: ${linkGroup}`;
+🔗 Link Grup: ${linkGroup}
+
+📱 Daftar Nomor:
+${daftarNomor.join('\n')}`;
+
+potongSaldo(hargaDipilih);
 
 window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,'_blank');
 
 document.getElementById('orderPopup').style.display='none';
 document.getElementById('groupLink').value='';
+document.getElementById('nomorList').value='';
 }
 
 
@@ -638,15 +920,297 @@ document.querySelectorAll('.food-card').forEach(card=>{
 card.style.cursor='pointer';
 });
 
+
+function renderSewa(){
+
+const wrap = document.getElementById('sewaContent');
+
+for(let key in DATA_SEWA){
+
+const kategori = DATA_SEWA[key];
+
+wrap.innerHTML += `
+<div class="section-title" style="margin-top:30px">
+${kategori.title}
+</div>
+
+<div class="cards-grid">
+
+${kategori.items.map(item=>`
+
+<div class="food-card"
+style="cursor:pointer;width:100%"
+onclick="orderSewa(
+'${item.nama}',
+'${item.harga}',
+'${item.deskripsi}',
+${item.nomor}
+)">
+
+<img src="https://cdn.odzre.my.id/ln2.jpg"
+class="card-image">
+
+<div class="card-details">
+
+<div class="menu-name">
+${item.nama}
+</div>
+
+<p>
+Rp ${Number(item.harga).toLocaleString('id-ID')}
+</p>
+
+</div>
+
+</div>
+
+`).join('')}
+
+</div>
+`;
+
+}
+
+}
+
+renderSewa();
+
+
+let premiumProduk='';
+let premiumHarga='';
+
+function orderPremium(nama,harga,desk){
+
+premiumProduk = nama;
+premiumHarga = harga;
+
+document.getElementById('premiumDesk')
+.innerHTML = desk;
+
+document.getElementById('premiumPopup')
+.style.display='flex';
+
+}
+
+function tutupPremium(){
+
+document.getElementById('premiumPopup')
+.style.display='none';
+
+document.getElementById('premiumNomor')
+.value='';
+
+}
+
+function kirimPremium(){
+
+const nomorUser =
+document.getElementById('premiumNomor')
+.value;
+
+if(!nomorUser){
+
+alert('Nomor wajib diisi');
+return;
+
+}
+
+if(!cekSaldo(premiumHarga)){
+return;
+}
+
+potongSaldo(premiumHarga);
+
+const admin='6285784085236';
+
+const pesan =
+`Halo Admin VEXELSOFT
+
+👑 Order Premium User
+
+📦 Produk: ${premiumProduk}
+💰 Harga: Rp ${Number(premiumHarga).toLocaleString('id-ID')}
+
+📱 Nomor Premium:
+${nomorUser}
+`;
+
+window.open(
+`https://wa.me/${admin}?text=${encodeURIComponent(pesan)}`,
+'_blank'
+);
+
+tutupPremium();
+
+}
+
+
+
+
+
+
+
+async function cekSaldo(harga){
+const response=await fetch('/api/profile');
+const data=await response.json();
+
+if(Number(data.saldo)<Number(harga)){
+alert('Saldo tidak mencukupi');
+switchTab('deposit');
+return false;
+}
+return true;
+}
+
+async function potongSaldo(harga){
+await fetch('/api/order',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({potongSaldo:Number(harga)})
+});
+updateSaldo();
+}
+
+async function updateSaldo(){
+const response=await fetch('/api/profile');
+const data=await response.json();
+
+document.getElementById('saldoText').innerHTML=
+Number(data.saldo).toLocaleString('id-ID');
+}
+}
+
+
+function updateSaldo(){
+
+const saldo =
+Number(localStorage.getItem('saldo') || 0);
+
+document.getElementById('saldoText')
+.innerHTML =
+saldo.toLocaleString('id-ID');
+
+}
+
+function kirimDeposit(){
+
+const nominal =
+document.getElementById('depositNominal').value;
+
+const metode =
+document.getElementById('paymentMethod').value;
+
+const bukti =
+document.getElementById('buktiTransfer').value;
+
+if(!nominal || !bukti){
+
+alert('Lengkapi data deposit');
+return;
+
+}
+
+const admin='6285784085236';
+
+const pesan =
+`Halo Admin VEXELSOFT
+
+💰 REQUEST DEPOSIT
+
+Nominal:
+Rp ${Number(nominal).toLocaleString('id-ID')}
+
+Metode:
+${metode}
+
+Bukti:
+${bukti}
+
+Mohon ACC saldo user.
+`;
+
+window.open(
+`https://wa.me/${admin}?text=${encodeURIComponent(pesan)}`,
+'_blank'
+);
+
+const riwayat =
+document.getElementById('riwayatDeposit');
+
+riwayat.innerHTML += `
+<hr>
+<p>
+Deposit Rp ${Number(nominal).toLocaleString('id-ID')}
+<br>
+Metode: ${metode}
+<br>
+Status: Pending ACC Developer
+</p>
+`;
+
+alert('Deposit berhasil dikirim');
+
+}
+
+updateSaldo();
+
+
 loadServices();
+
 </script>
 
+
+
+<div class="order-popup" id="premiumPopup">
+<div class="popup-box">
+
+<div class="popup-title">
+👑 Premium User
+</div>
+
+<div id="premiumDesk" class="popup-desc"></div>
+
+<input
+type="text"
+class="input-box"
+id="premiumNomor"
+placeholder="628xxxxxxxxxx">
+
+<div style="display:flex;gap:10px;margin-top:10px">
+
+<button
+class="btn-add"
+style="background:#999"
+onclick="tutupPremium()">
+Back
+</button>
+
+<button
+class="btn-add"
+onclick="kirimPremium()">
+Buy
+</button>
+
+</div>
+
+</div>
+</div>
 
 <div class="order-popup" id="orderPopup">
 <div class="popup-box">
 <div class="popup-title">🔗 Link Grup WhatsApp</div>
 <div id="deskProduk" class="popup-desc"></div><div class="popup-desc">Masukkan link grup terlebih dahulu untuk melanjutkan order</div>
 <input type="text" class="input-box" id="groupLink" placeholder="https://chat.whatsapp.com/...">
+
+<textarea
+class="input-box"
+id="nomorList"
+placeholder="Masukkan nomor satu per baris&#10;628xxxx"
+style="height:120px"></textarea>
+
+<div id="infoNomor" class="popup-desc">
+Kosongkan jika paket tidak membutuhkan nomor tambahan
+</div>
 <div style="display:flex;gap:10px;margin-top:10px">
 <button class="btn-add" style="background:#999" onclick="tutupPopup()">Back</button>
 <button class="btn-add" onclick="kirimOrder()">Buy</button>
