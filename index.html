@@ -1021,6 +1021,19 @@ return;
 
 potongSaldo(premiumHarga);
 
+const response=await fetch('/api/deposit',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({nominal,metode,bukti})
+});
+
+const data=await response.json();
+
+if(data.status){
+alert('Deposit dikirim dan menunggu ACC admin');
+}
+return;
+
 const admin='6285784085236';
 
 const pesan =
@@ -1049,50 +1062,50 @@ tutupPremium();
 
 
 
+let saldoUser=0;
 
-async function cekSaldo(harga){
-const response=await fetch('/api/profile');
-const data=await response.json();
+function cekSaldo(harga){
 
-if(Number(data.saldo)<Number(harga)){
-alert('Saldo tidak mencukupi');
+if(saldoUser < Number(harga)){
+
+alert('Saldo tidak mencukupi untuk membeli layanan ini.\n\nSilakan deposit terlebih dahulu.');
 switchTab('deposit');
 return false;
+
 }
+
 return true;
+
 }
 
 async function potongSaldo(harga){
-await fetch('/api/order',{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({potongSaldo:Number(harga)})
-});
+
+saldoUser -= Number(harga);
 updateSaldo();
+
 }
 
+
 async function updateSaldo(){
+
+try{
+
 const response=await fetch('/api/profile');
 const data=await response.json();
 
-document.getElementById('saldoText').innerHTML=
-Number(data.saldo).toLocaleString('id-ID');
-}
-}
+saldoUser=Number(data.saldo || 0);
 
+document.getElementById('saldoText').innerHTML=saldoUser.toLocaleString('id-ID');
 
-function updateSaldo(){
+}catch(e){
 
-const saldo =
-Number(localStorage.getItem('saldo') || 0);
-
-document.getElementById('saldoText')
-.innerHTML =
-saldo.toLocaleString('id-ID');
+document.getElementById('saldoText').innerHTML='0';
 
 }
 
-function kirimDeposit(){
+}
+
+async function kirimDeposit(){
 
 const nominal =
 document.getElementById('depositNominal').value;
