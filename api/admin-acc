@@ -1,8 +1,49 @@
+let users=[{
+id:1,
+saldo:0
+}];
+
+let deposits=[];
+
 export default function handler(req,res){
 
+if(req.method!=="POST"){
+return res.status(405).end();
+}
+
+const {depositId}=req.body;
+
+const deposit=
+deposits.find(
+x=>x.id==depositId
+);
+
+if(!deposit){
+
 return res.json({
+status:false,
+message:'Deposit tidak ditemukan'
+});
+
+}
+
+if(deposit.status==="success"){
+
+return res.json({
+status:false,
+message:'Sudah di ACC'
+});
+
+}
+
+deposit.status='success';
+
+users[0].saldo +=
+Number(deposit.nominal);
+
+res.json({
 status:true,
-message:'Endpoint ACC admin siap dikembangkan'
+message:'Deposit berhasil di ACC'
 });
 
 }
