@@ -1,21 +1,113 @@
-<!DOCTYPE html><html><body>
-<h2>Admin Deposit</h2><div id='list'>Loading...</div>
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Admin Deposit</h2>
+
+<div id="list">
+Loading...
+</div>
+
 <script>
+
 async function load(){
-let r=await fetch('/api/deposits');
-let d=await r.json();
+
+try{
+
+const r=
+await fetch(
+'/api/deposits'
+);
+
+const d=
+await r.json();
+
 let html='';
-(d.data||[]).forEach(x=>{
-html+=`<div style="border:1px solid #ddd;padding:10px;margin:10px">
-Rp ${x.nominal}<br>${x.metode}<br>${x.bukti}<br>
-<button onclick="acc(${x.id})">ACC</button></div>`
+
+if(
+!d.data ||
+d.data.length===0
+){
+
+html=
+'Tidak ada deposit';
+
+}else{
+
+d.data.forEach(x=>{
+
+html += `
+<div style="
+border:1px solid #ddd;
+padding:10px;
+margin:10px">
+
+Rp ${x.nominal}<br>
+${x.metode}<br>
+${x.bukti}<br><br>
+
+<button
+onclick="acc(${x.id})">
+
+ACC
+
+</button>
+
+</div>
+`;
+
 });
-document.getElementById('list').innerHTML=html||'Tidak ada deposit';
+
 }
+
+document
+.getElementById(
+'list'
+)
+.innerHTML=html;
+
+}catch(err){
+
+document
+.getElementById(
+'list'
+)
+.innerHTML=
+'Error: '+err.message;
+
+}
+
+}
+
 async function acc(id){
-let r=await fetch('/api/admin-acc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({depositId:id})});
-alert((await r.json()).message);
-load();
+
+const r=
+await fetch(
+'/api/admin-acc',
+{
+method:'POST',
+headers:{
+'Content-Type':
+'application/json'
+},
+body:JSON.stringify({
+depositId:id
+})
 }
+);
+
+alert(
+(await r.json())
+.message
+);
+
 load();
-</script></body></html>
+
+}
+
+load();
+
+</script>
+
+</body>
+</html>
