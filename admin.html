@@ -1,123 +1,21 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<title>Admin Deposit</title>
-<style>
-body{
-font-family:Arial;
-padding:20px;
-background:#f5f5f5;
-}
-.card{
-background:white;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-button{
-padding:10px 15px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#2d1b18;
-color:white;
-}
-</style>
-</head>
-<body>
-
-<h2>Deposit Pending</h2>
-
-<div id="depositList">
-Memuat...
-</div>
-
+<!DOCTYPE html><html><body>
+<h2>Admin Deposit</h2><div id='list'>Loading...</div>
 <script>
-
-async function loadDeposit(){
-
-const response=
-await fetch('/api/deposits');
-
-const data=
-await response.json();
-
-const wrap=
-document.getElementById(
-'depositList'
-);
-
-if(!data.data?.length){
-
-wrap.innerHTML=
-'Tidak ada deposit';
-
-return;
-
-}
-
-wrap.innerHTML='';
-
-data.data.forEach(item=>{
-
-wrap.innerHTML += `
-
-<div class="card">
-
-💰 Rp ${Number(item.nominal)
-.toLocaleString('id-ID')}
-<br><br>
-
-🏦 ${item.metode}
-<br><br>
-
-📝 ${item.bukti}
-<br><br>
-
-<button onclick="acc('${item.id}')">
-
-ACC Deposit
-
-</button>
-
-</div>
-
-`;
-
+async function load(){
+let r=await fetch('/api/deposits');
+let d=await r.json();
+let html='';
+(d.data||[]).forEach(x=>{
+html+=`<div style="border:1px solid #ddd;padding:10px;margin:10px">
+Rp ${x.nominal}<br>${x.metode}<br>${x.bukti}<br>
+<button onclick="acc(${x.id})">ACC</button></div>`
 });
-
+document.getElementById('list').innerHTML=html||'Tidak ada deposit';
 }
-
 async function acc(id){
-
-const response=
-await fetch(
-'/api/admin-acc',
-{
-method:'POST',
-headers:{
-'Content-Type':'application/json'
-},
-body:JSON.stringify({
-depositId:id
-})
+let r=await fetch('/api/admin-acc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({depositId:id})});
+alert((await r.json()).message);
+load();
 }
-);
-
-const data=
-await response.json();
-
-alert(data.message);
-
-loadDeposit();
-
-}
-
-loadDeposit();
-
-</script>
-
-</body>
-</html>
+load();
+</script></body></html>
