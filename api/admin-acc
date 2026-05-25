@@ -1,49 +1,52 @@
-let users=[{
-id:1,
-saldo:0
-}];
-
-let deposits=[];
+import fs from "fs";
+import path from "path";
 
 export default function handler(req,res){
 
-if(req.method!=="POST"){
-return res.status(405).end();
-}
+const filePath=
+path.join(
+process.cwd(),
+"data",
+"deposits.json"
+);
+
+let deposits=
+JSON.parse(
+fs.readFileSync(
+filePath,
+"utf8"
+)
+);
 
 const {depositId}=req.body;
 
-const deposit=
-deposits.find(
+const index=
+deposits.findIndex(
 x=>x.id==depositId
 );
 
-if(!deposit){
+if(index<0){
 
 return res.json({
-status:false,
-message:'Deposit tidak ditemukan'
+status:false
 });
 
 }
 
-if(deposit.status==="success"){
+deposits[index]
+.status="success";
 
-return res.json({
-status:false,
-message:'Sudah di ACC'
-});
-
-}
-
-deposit.status='success';
-
-users[0].saldo +=
-Number(deposit.nominal);
+fs.writeFileSync(
+filePath,
+JSON.stringify(
+deposits,
+null,
+2
+)
+);
 
 res.json({
-status:true,
-message:'Deposit berhasil di ACC'
+status:true
 });
 
 }
