@@ -1,91 +1,123 @@
 export default async function handler(req, res) {
 
-    if (req.method !== 'POST') {
+    if(req.method !== 'POST') {
+
         return res.status(405).json({
-            status: false,
-            message: 'Method not allowed'
+
+            status:false,
+            message:'Method not allowed'
+
         });
+
     }
 
     try {
 
         const {
-            platform,
+            service,
             target,
-            jumlah
+            quantity
         } = req.body;
 
         /*
-        ====================================
-        GANTI SERVICE ID SESUAI PROVIDER
-        ====================================
+        ==============================
+        ENV VERCEL
+        ==============================
         */
 
-        let service = '';
+        const api_id =
+        process.env.API_ID;
 
-        if(platform === 'instagram') {
-            service = '1';
-        }
-
-        if(platform === 'tiktok') {
-            service = '2';
-        }
-
-        if(platform === 'youtube') {
-            service = '3';
-        }
+        const api_key =
+        process.env.API_KEY;
 
         /*
-        ====================================
-        REQUEST API PROVIDER
-        ====================================
+        ==============================
+        FORM DATA
+        ==============================
         */
 
-        const response = await fetch('https://fayupedia.id/api/order', {
+        const formData =
+        new URLSearchParams();
 
-            method: 'POST',
+        formData.append(
+            'api_id',
+            api_id
+        );
 
-            headers: {
-                'Content-Type': 'application/json'
-            },
+        formData.append(
+            'api_key',
+            api_key
+        );
 
-            body: JSON.stringify({
+        formData.append(
+            'service',
+            service
+        );
 
-                api_key: process.env.API_KEY,
+        formData.append(
+            'target',
+            target
+        );
 
-                service: service,
-
-                target: target,
-
-                quantity: jumlah
-
-            })
-
-        });
-
-        const data = await response.json();
+        formData.append(
+            'quantity',
+            quantity
+        );
 
         /*
-        ====================================
-        RESPONSE KE WEBSITE
-        ====================================
+        ==============================
+        REQUEST API
+        ==============================
+        */
+
+        const response = await fetch(
+
+            'https://fayupedia.id/api/order',
+
+            {
+
+                method:'POST',
+
+                headers:{
+
+                    'Content-Type':
+                    'application/x-www-form-urlencoded'
+
+                },
+
+                body:formData.toString()
+
+            }
+
+        );
+
+        const data =
+        await response.json();
+
+        /*
+        ==============================
+        RESPONSE
+        ==============================
         */
 
         return res.status(200).json({
 
-            status: true,
+            status:true,
 
-            data: data
+            data:data
 
         });
 
-    } catch (err) {
+    } catch(err) {
 
         return res.status(500).json({
 
-            status: false,
+            status:false,
 
-            message: 'Server Error'
+            message:'Server Error',
+
+            error:err.message
 
         });
 
