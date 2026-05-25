@@ -1,8 +1,9 @@
-export default function handler(req,res){
+export default async function handler(req,res){
 
 return res.status(200).json({
 status:true,
-message:"deposits.js berjalan"
+url: process.env.SUPABASE_URL,
+keyExists: !!process.env.SUPABASE_ANON_KEY
 });
 
 }
