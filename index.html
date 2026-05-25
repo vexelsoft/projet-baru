@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VEXELSOFT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXELSOFT</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 
-:root {
-    --bg-color: #fdfbf7;
-    --primary-dark: #2d1b18;
-    --primary-brown: #3e2723;
-    --accent-gold: #c5a065;
-    --shadow-soft: 0 10px 40px -10px rgba(62,39,35,.08);
-    --shadow-hover: 0 20px 50px -10px rgba(62,39,35,.15);
+:root{
+    --bg-color:#fdfbf7;
+    --primary-dark:#2d1b18;
+    --primary-brown:#3e2723;
+    --accent-gold:#c5a065;
+    --shadow-soft:0 10px 40px -10px rgba(62,39,35,.08);
+    --shadow-hover:0 20px 50px -10px rgba(62,39,35,.15);
 }
 
 *{
@@ -56,8 +56,8 @@ body{
 }
 
 .menu-toggle-btn{
-    background:none;
     border:none;
+    background:none;
     color:#fff;
     font-size:1.5rem;
 }
@@ -74,6 +74,10 @@ body{
     padding:2rem;
     z-index:1002;
     transition:.3s;
+}
+
+.sidebar.active{
+    left:0;
 }
 
 .logo-area{
@@ -163,15 +167,6 @@ body{
     font-family:'Playfair Display',serif;
 }
 
-/* GRID */
-
-.menu-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:25px;
-    margin-bottom:3rem;
-}
-
 /* CARD */
 
 .food-card{
@@ -180,6 +175,7 @@ body{
     overflow:hidden;
     box-shadow:var(--shadow-soft);
     transition:.3s;
+    max-width:500px;
 }
 
 .food-card:hover{
@@ -194,35 +190,43 @@ body{
 .menu-name{
     font-size:1.1rem;
     font-weight:700;
-    margin-bottom:10px;
-}
-
-.price{
-    color:var(--accent-gold);
-    font-weight:700;
-    font-size:1.1rem;
-    margin-top:15px;
-}
-
-.btn-add{
-    width:100%;
-    height:45px;
-    border:none;
-    border-radius:14px;
-    background:var(--primary-brown);
-    color:#fff;
-    cursor:pointer;
-    margin-top:15px;
-    font-weight:700;
+    margin-bottom:15px;
 }
 
 .input-box{
     width:100%;
-    height:45px;
+    height:48px;
     border:1px solid #ddd;
     border-radius:12px;
-    padding:10px;
+    padding:12px;
     margin-bottom:12px;
+    font-size:14px;
+}
+
+.btn-add{
+    width:100%;
+    height:48px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary-brown);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.btn-add:hover{
+    opacity:.9;
+}
+
+.price-info{
+    background:#f7f7f7;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:15px;
+    font-size:14px;
+    line-height:1.7;
+    color:#555;
 }
 
 .menu-overlay{
@@ -273,7 +277,8 @@ body{
 </head>
 <body>
 
-<div class="menu-overlay" onclick="toggleMenu()"></div>
+<div class="menu-overlay"
+onclick="toggleMenu()"></div>
 
 <div class="mobile-header">
 
@@ -290,7 +295,8 @@ body{
 
 </div>
 
-<nav class="sidebar" id="sidebar">
+<nav class="sidebar"
+id="sidebar">
 
     <div class="logo-area">
 
@@ -367,29 +373,21 @@ body{
             Paket Bot
         </div>
 
-        <div class="menu-grid">
+        <div class="food-card">
 
-            <div class="food-card">
+            <div class="card-details">
 
-                <div class="card-details">
-
-                    <div class="menu-name">
-                        Paket Bot 1 Bulan
-                    </div>
-
-                    <p>
-                        Sewa bot WhatsApp selama 1 bulan.
-                    </p>
-
-                    <div class="price">
-                        Rp 10.000
-                    </div>
-
-                    <button class="btn-add">
-                        Order
-                    </button>
-
+                <div class="menu-name">
+                    Paket Bot 1 Bulan
                 </div>
+
+                <p>
+                    Sewa bot WhatsApp selama 1 bulan.
+                </p>
+
+                <button class="btn-add">
+                    Rp 10.000
+                </button>
 
             </div>
 
@@ -399,35 +397,28 @@ body{
 
     <!-- TAB PREMIUM -->
 
-    <div id="premium" style="display:none;">
+    <div id="premium"
+    style="display:none;">
 
         <div class="section-title">
             Premium User
         </div>
 
-        <div class="menu-grid">
+        <div class="food-card">
 
-            <div class="food-card">
+            <div class="card-details">
 
-                <div class="card-details">
-
-                    <div class="menu-name">
-                        Premium User 1 Bulan
-                    </div>
-
-                    <p>
-                        Premium user selama 1 bulan.
-                    </p>
-
-                    <div class="price">
-                        Rp 5.000
-                    </div>
-
-                    <button class="btn-add">
-                        Order
-                    </button>
-
+                <div class="menu-name">
+                    Premium User 1 Bulan
                 </div>
+
+                <p>
+                    Premium user selama 1 bulan.
+                </p>
+
+                <button class="btn-add">
+                    Rp 5.000
+                </button>
 
             </div>
 
@@ -437,61 +428,58 @@ body{
 
     <!-- TAB SOSMED -->
 
-    <div id="sosmed" style="display:none;">
+    <div id="sosmed"
+    style="display:none;">
 
         <div class="section-title">
             Suntik Sosmed
         </div>
 
-        <div class="menu-grid">
+        <div class="food-card">
 
-            <div class="food-card">
+            <div class="card-details">
 
-                <div class="card-details">
+                <div class="menu-name">
+                    Order Layanan Sosmed
+                </div>
 
-                    <div class="menu-name">
-                        Order Layanan Sosmed
-                    </div>
+                <select
+                id="service"
+                class="input-box">
 
-                    <select
-                    id="service"
-                    class="input-box">
+                    <option>
+                        Loading layanan...
+                    </option>
 
-                        <option value="1038">
-                            Instagram Followers
-                        </option>
+                </select>
 
-                        <option value="2045">
-                            TikTok Followers
-                        </option>
+                <div
+                id="priceInfo"
+                class="price-info">
 
-                        <option value="3011">
-                            YouTube Subscribers
-                        </option>
-
-                    </select>
-
-                    <input
-                    type="text"
-                    id="target"
-                    class="input-box"
-                    placeholder="Username / Link">
-
-                    <input
-                    type="number"
-                    id="quantity"
-                    class="input-box"
-                    placeholder="Jumlah">
-
-                    <button
-                    class="btn-add"
-                    onclick="orderSosmed()">
-
-                        Order Sekarang
-
-                    </button>
+                    Memuat layanan...
 
                 </div>
+
+                <input
+                type="text"
+                id="target"
+                class="input-box"
+                placeholder="Username / Link">
+
+                <input
+                type="number"
+                id="quantity"
+                class="input-box"
+                placeholder="Jumlah">
+
+                <button
+                class="btn-add"
+                onclick="orderSosmed()">
+
+                    Order Sekarang
+
+                </button>
 
             </div>
 
@@ -529,6 +517,96 @@ function toggleMenu(){
 
 }
 
+/* =========================
+LOAD SERVICES
+========================= */
+
+let allServices = [];
+
+async function loadServices(){
+
+    try{
+
+        const response =
+        await fetch('/api/services');
+
+        const data =
+        await response.json();
+
+        const select =
+        document.getElementById('service');
+
+        select.innerHTML = '';
+
+        allServices =
+        data.services;
+
+        data.services.forEach(service => {
+
+            select.innerHTML += `
+
+            <option value="${service.id}">
+
+                ${service.name}
+                - Rp ${service.price}
+
+            </option>
+
+            `;
+
+        });
+
+        updatePriceInfo();
+
+    }catch(err){
+
+        alert('Gagal load layanan');
+
+    }
+
+}
+
+/* =========================
+UPDATE INFO
+========================= */
+
+function updatePriceInfo(){
+
+    const serviceId =
+    document.getElementById('service').value;
+
+    const service =
+    allServices.find(
+        x => x.id == serviceId
+    );
+
+    if(service){
+
+        document.getElementById(
+            'priceInfo'
+        ).innerHTML =
+
+        `
+        Min Order : ${service.min}<br>
+        Max Order : ${service.max}<br>
+        Harga : Rp ${service.price}
+        `;
+
+    }
+
+}
+
+document
+.getElementById('service')
+.addEventListener(
+    'change',
+    updatePriceInfo
+);
+
+/* =========================
+ORDER
+========================= */
+
 async function orderSosmed(){
 
     const service =
@@ -550,7 +628,8 @@ async function orderSosmed(){
 
     try{
 
-        const response = await fetch('/api/order',{
+        const response =
+        await fetch('/api/order',{
 
             method:'POST',
 
@@ -568,7 +647,8 @@ async function orderSosmed(){
 
         });
 
-        const data = await response.json();
+        const data =
+        await response.json();
 
         if(data.status){
 
@@ -580,7 +660,8 @@ async function orderSosmed(){
         }else{
 
             alert(
-                data.message || 'Order gagal'
+                data.message ||
+                'Order gagal'
             );
 
         }
@@ -592,6 +673,8 @@ async function orderSosmed(){
     }
 
 }
+
+loadServices();
 
 </script>
 </body>
