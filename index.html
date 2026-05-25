@@ -211,6 +211,28 @@ body{
     display:block;
 }
 
+
+.category-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.category-btn{
+    border:none;
+    background:#eee;
+    padding:10px 16px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.category-btn.active{
+    background:var(--primary-brown);
+    color:#fff;
+}
+
 @media(max-width:992px){
     .mobile-header{display:flex}
     .sidebar{left:-300px}
@@ -330,9 +352,8 @@ body{
                     Order Layanan Sosmed
                 </div>
 
-                <select id="category" class="input-box">
-                    <option value="">Pilih Kategori</option>
-                </select>
+                <div class="category-buttons" id="categoryButtons">
+                </div>
 
                 <select id="service" class="input-box">
                     <option value="">Pilih Layanan</option>
@@ -392,10 +413,10 @@ async function loadServices(){
 
         const categories = [...new Set(allServices.map(item=>item.category))];
 
-        const categorySelect = document.getElementById('category');
+        const categoryButtons =
+        document.getElementById('categoryButtons');
 
-        categorySelect.innerHTML =
-        '<option value="">Pilih Kategori</option>';
+        categoryButtons.innerHTML = '';
 
         categories.forEach(cat=>{
 
@@ -407,10 +428,12 @@ async function loadServices(){
             else if(cat.toLowerCase().includes('facebook')) icon='📘';
             else if(cat.toLowerCase().includes('youtube')) icon='▶️';
 
-            categorySelect.innerHTML += `
-            <option value="${cat}">
+            categoryButtons.innerHTML += `
+            <button
+            class="category-btn"
+            onclick="selectCategory('${cat}', this)">
                 ${icon} ${cat}
-            </option>`;
+            </button>`;
         });
 
     }catch(err){
@@ -418,10 +441,24 @@ async function loadServices(){
     }
 }
 
+let selectedCategory = '';
+
+function selectCategory(category, btn){
+
+    selectedCategory = category;
+
+    document
+    .querySelectorAll('.category-btn')
+    .forEach(el=>el.classList.remove('active'));
+
+    btn.classList.add('active');
+
+    loadCategoryServices();
+}
+
 function loadCategoryServices(){
 
-    const category =
-    document.getElementById('category').value;
+    const category = selectedCategory;
 
     const serviceSelect =
     document.getElementById('service');
@@ -526,9 +563,6 @@ async function orderSosmed(){
 
     }
 }
-
-document.getElementById('category')
-.addEventListener('change',loadCategoryServices);
 
 document.getElementById('service')
 .addEventListener('change',updatePriceInfo);
