@@ -1,4 +1,4 @@
-import {supabase} from './supabase'
+import {supabase} from './supabase.js'
 export default async function handler(req,res){
 const {depositId}=req.body;
 await supabase.from('deposits').update({status:'success'}).eq('id',depositId);
