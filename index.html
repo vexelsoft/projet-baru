@@ -433,22 +433,48 @@ nomor:0
 <div id="sewaContent"></div>
 
 </div>
-<div id="premium"
- style="display:none;">
+
+<div id="premium" style="display:none;">
+
 <div class="section-title">Premium User</div>
+
 <div class="cards-grid">
-<div class="food-card">
-<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
+
+<div class="food-card"
+style="cursor:pointer;width:100%"
+onclick="orderPremium(
+'Premium User 1 Bulan',
+'5000',
+'Premium User 1 Bulan'
+)">
+
+<img src="https://cdn.odzre.my.id/ln2.jpg"
+class="card-image">
+
 <div class="card-details">
-<div class="menu-name">Premium User 1 Bulan</div>
-<p>Premium user selama 1 bulan.</p><br>
-<button class="btn-add">Rp 5.000</button>
-</div>
-</div>
-</div>
+
+<div class="menu-name">
+Premium User 1 Bulan
 </div>
 
-<div id="sosmed" style="display:none;">
+<p>
+Premium user selama 1 bulan
+</p><br>
+
+<button class="btn-add">
+Rp 5.000
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="sosmed"
+ style="display:none;">
 <div class="section-title">Suntik Sosmed</div>
 
 <div class="food-card">
@@ -834,10 +860,111 @@ Rp ${Number(item.harga).toLocaleString('id-ID')}
 }
 
 renderSewa();
+
+
+let premiumProduk='';
+let premiumHarga='';
+
+function orderPremium(nama,harga,desk){
+
+premiumProduk = nama;
+premiumHarga = harga;
+
+document.getElementById('premiumDesk')
+.innerHTML = desk;
+
+document.getElementById('premiumPopup')
+.style.display='flex';
+
+}
+
+function tutupPremium(){
+
+document.getElementById('premiumPopup')
+.style.display='none';
+
+document.getElementById('premiumNomor')
+.value='';
+
+}
+
+function kirimPremium(){
+
+const nomorUser =
+document.getElementById('premiumNomor')
+.value;
+
+if(!nomorUser){
+
+alert('Nomor wajib diisi');
+return;
+
+}
+
+const admin='6281234567890';
+
+const pesan =
+`Halo Admin VEXELSOFT
+
+👑 Order Premium User
+
+📦 Produk: ${premiumProduk}
+💰 Harga: Rp ${Number(premiumHarga).toLocaleString('id-ID')}
+
+📱 Nomor Premium:
+${nomorUser}
+`;
+
+window.open(
+`https://wa.me/${admin}?text=${encodeURIComponent(pesan)}`,
+'_blank'
+);
+
+tutupPremium();
+
+}
+
+
 loadServices();
 
 </script>
 
+
+
+<div class="order-popup" id="premiumPopup">
+<div class="popup-box">
+
+<div class="popup-title">
+👑 Premium User
+</div>
+
+<div id="premiumDesk" class="popup-desc"></div>
+
+<input
+type="text"
+class="input-box"
+id="premiumNomor"
+placeholder="628xxxxxxxxxx">
+
+<div style="display:flex;gap:10px;margin-top:10px">
+
+<button
+class="btn-add"
+style="background:#999"
+onclick="tutupPremium()">
+Back
+</button>
+
+<button
+class="btn-add"
+onclick="kirimPremium()">
+Buy
+</button>
+
+</div>
+
+</div>
+</div>
 
 <div class="order-popup" id="orderPopup">
 <div class="popup-box">
