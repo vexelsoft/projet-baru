@@ -2,8 +2,9 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VEXELSOFT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>VEXELSOFT STORE</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
@@ -12,14 +13,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
 <style>
 
+/* =========================
+ROOT
+========================= */
+
 :root{
+
     --bg-color:#fdfbf7;
     --primary-dark:#2d1b18;
     --primary-brown:#3e2723;
     --accent-gold:#c5a065;
-    --shadow-soft:0 10px 40px -10px rgba(62,39,35,.08);
-    --shadow-hover:0 20px 50px -10px rgba(62,39,35,.15);
+    --shadow-soft:
+    0 10px 40px -10px rgba(62,39,35,.08);
+
+    --shadow-hover:
+    0 20px 50px -10px rgba(62,39,35,.15);
+
 }
+
+/* =========================
+RESET
+========================= */
 
 *{
     margin:0;
@@ -28,247 +42,460 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 }
 
 body{
-    font-family:'Plus Jakarta Sans',sans-serif;
-    background:var(--bg-color);
+
+    font-family:
+    'Plus Jakarta Sans',
+    sans-serif;
+
+    background:
+    var(--bg-color);
+
     overflow-x:hidden;
+
 }
 
-/* MOBILE */
+/* =========================
+MOBILE HEADER
+========================= */
 
 .mobile-header{
+
     display:none;
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
     height:70px;
-    background:rgba(62,39,35,.98);
+
+    background:
+    rgba(62,39,35,.98);
+
     z-index:1001;
+
     align-items:center;
     justify-content:space-between;
+
     padding:0 20px;
+
 }
 
 .mobile-logo{
+
     color:#fff;
+
     font-size:1.2rem;
-    font-family:'Playfair Display',serif;
+
+    font-family:
+    'Playfair Display',
+    serif;
+
 }
 
 .menu-toggle-btn{
-    border:none;
+
     background:none;
+    border:none;
+
     color:#fff;
+
     font-size:1.5rem;
+
 }
 
-/* SIDEBAR */
+/* =========================
+SIDEBAR
+========================= */
 
 .sidebar{
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:280px;
     height:100vh;
-    background:rgba(62,39,35,.98);
+
+    background:
+    rgba(62,39,35,.98);
+
     padding:2rem;
+
     z-index:1002;
+
     transition:.3s;
+
 }
 
 .sidebar.active{
+
     left:0;
+
 }
 
 .logo-area{
+
     text-align:center;
+
     margin-bottom:3rem;
+
 }
 
 .logo-icon{
+
     color:var(--accent-gold);
+
     font-size:2.5rem;
+
     margin-bottom:10px;
+
 }
 
 .logo-text{
+
     color:#fff;
+
     font-size:1.6rem;
-    font-family:'Playfair Display',serif;
+
+    font-family:
+    'Playfair Display',
+    serif;
+
 }
 
 .logo-text span{
+
     color:var(--accent-gold);
+
 }
 
 .nav-menu{
+
     list-style:none;
+
     display:flex;
+
     flex-direction:column;
+
     gap:10px;
+
 }
 
 .nav-link{
+
     text-decoration:none;
-    color:rgba(255,255,255,.7);
+
+    color:
+    rgba(255,255,255,.7);
+
     padding:15px 18px;
+
     border-radius:14px;
+
     display:flex;
+
     align-items:center;
+
     gap:15px;
+
     transition:.3s;
+
 }
 
 .nav-link:hover,
 .nav-link.active{
-    background:rgba(255,255,255,.1);
+
+    background:
+    rgba(255,255,255,.1);
+
     color:#fff;
+
 }
 
-/* MAIN */
+/* =========================
+MAIN
+========================= */
 
 .main-wrapper{
+
     margin-left:280px;
+
     padding:2rem 3rem;
+
 }
 
-/* HERO */
+/* =========================
+HERO
+========================= */
 
 .hero-banner{
+
     background-image:
-    linear-gradient(to bottom, rgba(0,0,0,.6), rgba(45,27,24,.8)),
-    url('https://cdn.odzre.my.id/ln2.jpg');
+
+    linear-gradient(
+    to bottom,
+    rgba(0,0,0,.6),
+    rgba(45,27,24,.8)
+    ),
+
+    url(
+    'https://cdn.odzre.my.id/ln2.jpg'
+    );
 
     background-size:cover;
     background-position:center;
 
     border-radius:30px;
+
     padding:4rem 3rem;
+
     color:#fff;
+
     margin-bottom:3rem;
+
 }
 
 .hero-title{
+
     font-size:3rem;
-    font-family:'Playfair Display',serif;
+
+    font-family:
+    'Playfair Display',
+    serif;
+
     margin-bottom:15px;
+
 }
 
 .hero-subtitle{
+
     opacity:.9;
+
     line-height:1.7;
+
 }
 
-/* SECTION */
+/* =========================
+SECTION
+========================= */
 
 .section-title{
+
     font-size:2rem;
+
     margin-bottom:1.5rem;
-    font-family:'Playfair Display',serif;
+
+    font-family:
+    'Playfair Display',
+    serif;
+
 }
 
-/* CARD */
+/* =========================
+CARD
+========================= */
 
 .food-card{
+
     background:#fff;
+
     border-radius:24px;
+
     overflow:hidden;
-    box-shadow:var(--shadow-soft);
+
+    box-shadow:
+    var(--shadow-soft);
+
     transition:.3s;
-    max-width:500px;
+
+    max-width:600px;
+
 }
 
 .food-card:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--shadow-hover);
+
+    transform:
+    translateY(-5px);
+
+    box-shadow:
+    var(--shadow-hover);
+
 }
 
 .card-details{
+
     padding:1.5rem;
+
 }
 
 .menu-name{
+
     font-size:1.1rem;
+
     font-weight:700;
+
     margin-bottom:15px;
+
 }
+
+/* =========================
+INPUT
+========================= */
 
 .input-box{
+
     width:100%;
-    height:48px;
-    border:1px solid #ddd;
-    border-radius:12px;
+
+    height:50px;
+
+    border:
+    1px solid #ddd;
+
+    border-radius:14px;
+
     padding:12px;
-    margin-bottom:12px;
+
+    margin-bottom:15px;
+
     font-size:14px;
+
+    outline:none;
+
 }
 
+.input-box:focus{
+
+    border-color:
+    var(--accent-gold);
+
+}
+
+/* =========================
+BUTTON
+========================= */
+
 .btn-add{
+
     width:100%;
-    height:48px;
+    height:50px;
+
     border:none;
+
     border-radius:14px;
-    background:var(--primary-brown);
+
+    background:
+    var(--primary-brown);
+
     color:#fff;
+
     font-weight:700;
+
     cursor:pointer;
-    margin-top:10px;
+
+    transition:.3s;
+
 }
 
 .btn-add:hover{
+
     opacity:.9;
+
 }
+
+/* =========================
+PRICE INFO
+========================= */
 
 .price-info{
+
     background:#f7f7f7;
-    padding:12px;
-    border-radius:12px;
+
+    padding:15px;
+
+    border-radius:14px;
+
     margin-bottom:15px;
+
     font-size:14px;
-    line-height:1.7;
+
     color:#555;
+
+    line-height:1.7;
+
 }
 
+/* =========================
+OVERLAY
+========================= */
+
 .menu-overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.5);
+
+    background:
+    rgba(0,0,0,.5);
+
     z-index:1000;
+
     display:none;
+
 }
 
 .menu-overlay.active{
+
     display:block;
+
 }
 
-/* MOBILE */
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:992px){
 
     .mobile-header{
+
         display:flex;
+
     }
 
     .sidebar{
+
         left:-300px;
+
     }
 
     .sidebar.active{
+
         left:0;
+
     }
 
     .main-wrapper{
+
         margin-left:0;
+
         padding:1.5rem;
+
         padding-top:100px;
+
     }
 
     .hero-banner{
+
         padding:3rem 1.5rem;
+
     }
 
     .hero-title{
+
         font-size:2rem;
+
     }
 
 }
@@ -277,8 +504,16 @@ body{
 </head>
 <body>
 
+<!-- =========================
+OVERLAY
+========================= -->
+
 <div class="menu-overlay"
 onclick="toggleMenu()"></div>
+
+<!-- =========================
+MOBILE HEADER
+========================= -->
 
 <div class="mobile-header">
 
@@ -286,7 +521,8 @@ onclick="toggleMenu()"></div>
         VEXELSOFT
     </div>
 
-    <button class="menu-toggle-btn"
+    <button
+    class="menu-toggle-btn"
     onclick="toggleMenu()">
 
         <i class="fas fa-bars"></i>
@@ -294,6 +530,10 @@ onclick="toggleMenu()"></div>
     </button>
 
 </div>
+
+<!-- =========================
+SIDEBAR
+========================= -->
 
 <nav class="sidebar"
 id="sidebar">
@@ -303,8 +543,11 @@ id="sidebar">
         <i class="fas fa-robot logo-icon"></i>
 
         <div class="logo-text">
+
             VEXEL <br>
+
             <span>SOFT</span>
+
         </div>
 
     </div>
@@ -312,65 +555,75 @@ id="sidebar">
     <ul class="nav-menu">
 
         <li>
-            <a href="#"
-            onclick="switchTab('sewa')"
-            id="nav-sewa"
-            class="nav-link active">
 
-                <i class="fas fa-server"></i>
-                Sewa Bot
+            <a href="#"
+            class="nav-link active"
+            id="nav-home"
+            onclick="switchTab('home')">
+
+                <i class="fas fa-house"></i>
+
+                Home
 
             </a>
+
         </li>
 
         <li>
+
             <a href="#"
-            onclick="switchTab('premium')"
-            id="nav-premium"
-            class="nav-link">
-
-                <i class="fas fa-crown"></i>
-                Premium User
-
-            </a>
-        </li>
-
-        <li>
-            <a href="#"
-            onclick="switchTab('sosmed')"
+            class="nav-link"
             id="nav-sosmed"
-            class="nav-link">
+            onclick="switchTab('sosmed')">
 
                 <i class="fas fa-rocket"></i>
+
                 Suntik Sosmed
 
             </a>
+
         </li>
 
     </ul>
 
 </nav>
 
+<!-- =========================
+MAIN
+========================= -->
+
 <div class="main-wrapper">
+
+    <!-- HERO -->
 
     <div class="hero-banner">
 
         <h1 class="hero-title">
+
             VEXELSOFT STORE
+
         </h1>
 
         <p class="hero-subtitle">
-            Solusi layanan bot WhatsApp dan layanan digital modern.
+
+            Solusi layanan digital modern
+            untuk kebutuhan sosial media
+            dan bot WhatsApp.
+
         </p>
 
     </div>
 
-    <!-- TAB SEWA -->
+    <!-- =========================
+    HOME
+    ========================= -->
 
-    <div id="sewa">
+    <div id="home">
 
         <div class="section-title">
-            Paket Bot
+
+            Dashboard
+
         </div>
 
         <div class="food-card">
@@ -378,16 +631,18 @@ id="sidebar">
             <div class="card-details">
 
                 <div class="menu-name">
-                    Paket Bot 1 Bulan
+
+                    Selamat Datang
+
                 </div>
 
-                <p>
-                    Sewa bot WhatsApp selama 1 bulan.
-                </p>
+                <p style="line-height:1.8;color:#666;">
 
-                <button class="btn-add">
-                    Rp 10.000
-                </button>
+                    Website VEXELSOFT kini
+                    mendukung layanan
+                    suntik sosial media otomatis.
+
+                </p>
 
             </div>
 
@@ -395,44 +650,17 @@ id="sidebar">
 
     </div>
 
-    <!-- TAB PREMIUM -->
-
-    <div id="premium"
-    style="display:none;">
-
-        <div class="section-title">
-            Premium User
-        </div>
-
-        <div class="food-card">
-
-            <div class="card-details">
-
-                <div class="menu-name">
-                    Premium User 1 Bulan
-                </div>
-
-                <p>
-                    Premium user selama 1 bulan.
-                </p>
-
-                <button class="btn-add">
-                    Rp 5.000
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- TAB SOSMED -->
+    <!-- =========================
+    SOSMED
+    ========================= -->
 
     <div id="sosmed"
     style="display:none;">
 
         <div class="section-title">
+
             Suntik Sosmed
+
         </div>
 
         <div class="food-card">
@@ -440,42 +668,68 @@ id="sidebar">
             <div class="card-details">
 
                 <div class="menu-name">
+
                     Order Layanan Sosmed
+
                 </div>
+
+                <!-- CATEGORY -->
+
+                <select
+                id="category"
+                class="input-box">
+
+                    <option value="">
+                        Pilih Kategori
+                    </option>
+
+                </select>
+
+                <!-- SERVICE -->
 
                 <select
                 id="service"
                 class="input-box">
 
-                    <option>
-                        Loading layanan...
+                    <option value="">
+                        Pilih Layanan
                     </option>
 
                 </select>
+
+                <!-- PRICE INFO -->
 
                 <div
                 id="priceInfo"
                 class="price-info">
 
-                    Memuat layanan...
+                    Pilih layanan terlebih dahulu
 
                 </div>
+
+                <!-- TARGET -->
 
                 <input
                 type="text"
                 id="target"
                 class="input-box"
-                placeholder="Username / Link">
+                placeholder="Masukkan username / link">
+
+                <!-- QUANTITY -->
 
                 <input
                 type="number"
                 id="quantity"
                 class="input-box"
-                placeholder="Jumlah">
+                placeholder="Jumlah order">
+
+                <!-- BUTTON -->
 
                 <button
                 class="btn-add"
                 onclick="orderSosmed()">
+
+                    <i class="fas fa-cart-shopping"></i>
 
                     Order Sekarang
 
@@ -491,37 +745,65 @@ id="sidebar">
 
 <script>
 
-function switchTab(type){
-
-    document.getElementById('sewa').style.display='none';
-    document.getElementById('premium').style.display='none';
-    document.getElementById('sosmed').style.display='none';
-
-    document.getElementById(type).style.display='block';
-
-    document.querySelectorAll('.nav-link')
-    .forEach(el=>el.classList.remove('active'));
-
-    document.getElementById('nav-'+type)
-    .classList.add('active');
-
-}
+/* =========================
+MENU
+========================= */
 
 function toggleMenu(){
 
-    document.getElementById('sidebar')
-    .classList.toggle('active');
+    document
+    .getElementById('sidebar')
+    .classList
+    .toggle('active');
 
-    document.querySelector('.menu-overlay')
-    .classList.toggle('active');
+    document
+    .querySelector('.menu-overlay')
+    .classList
+    .toggle('active');
 
 }
 
 /* =========================
-LOAD SERVICES
+TAB
+========================= */
+
+function switchTab(type){
+
+    document
+    .getElementById('home')
+    .style.display='none';
+
+    document
+    .getElementById('sosmed')
+    .style.display='none';
+
+    document
+    .getElementById(type)
+    .style.display='block';
+
+    document
+    .querySelectorAll('.nav-link')
+    .forEach(el => {
+
+        el.classList.remove('active');
+
+    });
+
+    document
+    .getElementById('nav-'+type)
+    .classList.add('active');
+
+}
+
+/* =========================
+SERVICES
 ========================= */
 
 let allServices = [];
+
+/* =========================
+LOAD SERVICES
+========================= */
 
 async function loadServices(){
 
@@ -533,22 +815,79 @@ async function loadServices(){
         const data =
         await response.json();
 
-        const select =
-        document.getElementById('service');
+        if(!data.status){
 
-        select.innerHTML = '';
+            alert(
+                data.message ||
+                'Gagal memuat layanan'
+            );
+
+            return;
+
+        }
 
         allServices =
         data.services;
 
-        data.services.forEach(service => {
+        /*
+        =========================
+        CATEGORY
+        =========================
+        */
 
-            select.innerHTML += `
+        const categories = [
 
-            <option value="${service.id}">
+            ...new Set(
 
-                ${service.name}
-                - Rp ${service.price}
+                allServices.map(
+
+                    item =>
+                    item.category
+
+                )
+
+            )
+
+        ];
+
+        const categorySelect =
+        document
+        .getElementById('category');
+
+        categorySelect.innerHTML =
+        '<option value="">Pilih Kategori</option>';
+
+        categories.forEach(cat => {
+
+            let icon = '📦';
+
+            if(cat.toLowerCase().includes('instagram')){
+
+                icon = '📸';
+
+            }else if(cat.toLowerCase().includes('tiktok')){
+
+                icon = '🎵';
+
+            }else if(cat.toLowerCase().includes('telegram')){
+
+                icon = '✈️';
+
+            }else if(cat.toLowerCase().includes('facebook')){
+
+                icon = '📘';
+
+            }else if(cat.toLowerCase().includes('youtube')){
+
+                icon = '▶️';
+
+            }
+
+            categorySelect.innerHTML += `
+
+            <option value="${cat}">
+
+                ${icon} ${cat}
 
             </option>
 
@@ -556,13 +895,58 @@ async function loadServices(){
 
         });
 
-        updatePriceInfo();
-
     }catch(err){
 
-        alert('Gagal load layanan');
+        console.log(err);
+
+        alert(
+            'Server error'
+        );
 
     }
+
+}
+
+/* =========================
+LOAD CATEGORY SERVICES
+========================= */
+
+function loadCategoryServices(){
+
+    const category =
+    document
+    .getElementById('category')
+    .value;
+
+    const serviceSelect =
+    document
+    .getElementById('service');
+
+    serviceSelect.innerHTML =
+    '<option value="">Pilih Layanan</option>';
+
+    const filtered =
+    allServices.filter(
+
+        item =>
+        item.category == category
+
+    );
+
+    filtered.forEach(service => {
+
+        serviceSelect.innerHTML += `
+
+        <option value="${service.id}">
+
+            ${service.name}
+            - Rp ${service.price.toLocaleString('id-ID')}
+
+        </option>
+
+        `;
+
+    });
 
 }
 
@@ -573,35 +957,50 @@ UPDATE INFO
 function updatePriceInfo(){
 
     const serviceId =
-    document.getElementById('service').value;
+    document
+    .getElementById('service')
+    .value;
 
     const service =
     allServices.find(
+
         x => x.id == serviceId
+
     );
 
     if(service){
 
-        document.getElementById(
-            'priceInfo'
-        ).innerHTML =
+        document
+        .getElementById('priceInfo')
+        .innerHTML =
 
         `
-        Min Order : ${service.min}<br>
-        Max Order : ${service.max}<br>
-        Harga : Rp ${service.price}
+
+        <b>${service.name}</b><br><br>
+
+        📦 Kategori :
+        ${service.category}<br>
+
+        📉 Min :
+        ${service.min}<br>
+
+        📈 Max :
+        ${service.max}<br>
+
+        💰 Harga :
+        Rp ${service.price.toLocaleString('id-ID')}<br>
+
+        ♻️ Refill :
+        ${service.refill ? 'Yes' : 'No'}<br><br>
+
+        📝
+        ${service.description || '-'}
+
         `;
 
     }
 
 }
-
-document
-.getElementById('service')
-.addEventListener(
-    'change',
-    updatePriceInfo
-);
 
 /* =========================
 ORDER
@@ -610,17 +1009,45 @@ ORDER
 async function orderSosmed(){
 
     const service =
-    document.getElementById('service').value;
+    document
+    .getElementById('service')
+    .value;
 
     const target =
-    document.getElementById('target').value;
+    document
+    .getElementById('target')
+    .value;
 
     const quantity =
-    document.getElementById('quantity').value;
+    document
+    .getElementById('quantity')
+    .value;
 
-    if(!target || !quantity){
+    if(!service){
 
-        alert('Lengkapi data');
+        alert(
+            'Pilih layanan'
+        );
+
+        return;
+
+    }
+
+    if(!target){
+
+        alert(
+            'Masukkan target'
+        );
+
+        return;
+
+    }
+
+    if(!quantity){
+
+        alert(
+            'Masukkan jumlah'
+        );
 
         return;
 
@@ -634,7 +1061,8 @@ async function orderSosmed(){
             method:'POST',
 
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':
+                'application/json'
             },
 
             body:JSON.stringify({
@@ -653,29 +1081,65 @@ async function orderSosmed(){
         if(data.status){
 
             alert(
-                'Order berhasil\nID: ' +
+
+                '✅ Order berhasil\n\n' +
+
+                'ID Order : ' +
+
                 data.data.order
+
             );
 
         }else{
 
             alert(
-                data.message ||
-                'Order gagal'
+
+                '❌ ' +
+
+                (
+                    data.message ||
+                    'Order gagal'
+                )
+
             );
 
         }
 
     }catch(err){
 
-        alert('Server error');
+        alert(
+            'Server error'
+        );
 
     }
 
 }
 
+/* =========================
+EVENT
+========================= */
+
+document
+.getElementById('category')
+.addEventListener(
+    'change',
+    loadCategoryServices
+);
+
+document
+.getElementById('service')
+.addEventListener(
+    'change',
+    updatePriceInfo
+);
+
+/* =========================
+INIT
+========================= */
+
 loadServices();
 
 </script>
+
 </body>
 </html>
