@@ -629,19 +629,6 @@ let groupedPlatforms = {};
 
 async function loadServices(){
 
-const serviceData =
-allServices.find(x=>x.id == service);
-
-const totalHarga =
-Math.ceil(
-(Number(quantity) / 1000) *
-Number(serviceData.price)
-);
-
-if(!cekSaldo(totalHarga)){
-return;
-}
-
 try{
 
 const response = await fetch('/api/services');
@@ -798,6 +785,9 @@ quantity
 const data = await response.json();
 
 if(data.status){
+
+const serviceData=allServices.find(x=>x.id==service);
+const totalHarga=Math.ceil((Number(quantity)/1000)*Number(serviceData.price||0));
 
 potongSaldo(totalHarga);
 
@@ -1021,19 +1011,6 @@ return;
 
 potongSaldo(premiumHarga);
 
-const response=await fetch('/api/deposit',{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({nominal,metode,bukti})
-});
-
-const data=await response.json();
-
-if(data.status){
-alert('Deposit dikirim dan menunggu ACC admin');
-}
-return;
-
 const admin='6285784085236';
 
 const pesan =
@@ -1068,8 +1045,12 @@ function cekSaldo(harga){
 
 if(saldoUser < Number(harga)){
 
-alert('Saldo tidak mencukupi untuk membeli layanan ini.\n\nSilakan deposit terlebih dahulu.');
+alert(
+'Saldo tidak mencukupi untuk membeli layanan ini.\n\nSilakan deposit terlebih dahulu agar saldo mencukupi.'
+);
+
 switchTab('deposit');
+
 return false;
 
 }
@@ -1078,13 +1059,13 @@ return true;
 
 }
 
-async function potongSaldo(harga){
+function potongSaldo(harga){
 
 saldoUser -= Number(harga);
+
 updateSaldo();
 
 }
-
 
 async function updateSaldo(){
 
@@ -1093,15 +1074,12 @@ try{
 const response=await fetch('/api/profile');
 const data=await response.json();
 
-saldoUser=Number(data.saldo || 0);
+saldoUser=Number(data.saldo||0);
 
-document.getElementById('saldoText').innerHTML=saldoUser.toLocaleString('id-ID');
+document.getElementById('saldoText')
+.innerHTML=saldoUser.toLocaleString('id-ID');
 
-}catch(e){
-
-document.getElementById('saldoText').innerHTML='0';
-
-}
+}catch(e){}
 
 }
 
@@ -1123,29 +1101,13 @@ return;
 
 }
 
-const admin='6285784085236';
+const response=await fetch('/api/deposit',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({nominal,metode,bukti})
+});
 
-const pesan =
-`Halo Admin VEXELSOFT
-
-💰 REQUEST DEPOSIT
-
-Nominal:
-Rp ${Number(nominal).toLocaleString('id-ID')}
-
-Metode:
-${metode}
-
-Bukti:
-${bukti}
-
-Mohon ACC saldo user.
-`;
-
-window.open(
-`https://wa.me/${admin}?text=${encodeURIComponent(pesan)}`,
-'_blank'
-);
+const data=await response.json();
 
 const riwayat =
 document.getElementById('riwayatDeposit');
@@ -1161,11 +1123,14 @@ Status: Pending ACC Developer
 </p>
 `;
 
-alert('Deposit berhasil dikirim');
+alert(data.message || 'Deposit berhasil dikirim');
 
 }
 
 updateSaldo();
+
+
+loadServices();updateSaldo();
 
 
 loadServices();
