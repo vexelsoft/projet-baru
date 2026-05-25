@@ -1279,11 +1279,16 @@ document.getElementById(
 'password'
 ).value;
 
-const {error}=
+const { data, error }=
 await supabase.auth.signUp({
 
 email,
-password
+password,
+
+options:{
+emailRedirectTo:
+"https://projet-baru.vercel.app"
+}
 
 });
 
@@ -1294,7 +1299,7 @@ alert(error.message);
 }else{
 
 alert(
-'Pendaftaran berhasil'
+"Cek email untuk verifikasi akun"
 );
 
 }
