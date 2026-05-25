@@ -1207,7 +1207,9 @@ const supabase = window.supabase.createClient(
   supabaseKey
 );
 </script>
-    <div id="loginBox" style="
+
+
+<div id="loginBox" style="
 position:fixed;
 top:0;
 left:0;
@@ -1231,16 +1233,25 @@ width:300px;
 
 <input
 id="email"
+type="email"
+autocomplete="username"
 placeholder="Email"
-style="width:100%;padding:10px;margin-bottom:10px;"
->
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+">
 
 <input
 id="password"
 type="password"
+autocomplete="current-password"
 placeholder="Password"
-style="width:100%;padding:10px;margin-bottom:10px;"
->
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+">
 
 <button
 onclick="login()"
@@ -1269,26 +1280,21 @@ Daftar
 
 async function register(){
 
-const email=
+const email =
 document.getElementById(
 'email'
 ).value;
 
-const password=
+const password =
 document.getElementById(
 'password'
 ).value;
 
-const { data, error }=
+const { error } =
 await supabase.auth.signUp({
 
 email,
-password,
-
-options:{
-emailRedirectTo:
-"https://projet-baru.vercel.app"
-}
+password
 
 });
 
@@ -1299,7 +1305,7 @@ alert(error.message);
 }else{
 
 alert(
-"Cek email untuk verifikasi akun"
+"Pendaftaran berhasil"
 );
 
 }
@@ -1308,18 +1314,20 @@ alert(
 
 async function login(){
 
-const email=
+const email =
 document.getElementById(
 'email'
 ).value;
 
-const password=
+const password =
 document.getElementById(
 'password'
 ).value;
 
-const {error}=
-await supabase.auth.signInWithPassword({
+const { data,error } =
+await supabase
+.auth
+.signInWithPassword({
 
 email,
 password
@@ -1343,12 +1351,12 @@ document
 
 }
 
-supabase.auth.getSession()
+supabase
+.auth
+.getSession()
 .then(({data})=>{
 
-if(
-data.session
-){
+if(data.session){
 
 document
 .getElementById(
@@ -1362,5 +1370,9 @@ document
 });
 
 </script>
+
+
+
+    
 </body>
 </html>
