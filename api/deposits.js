@@ -2,18 +2,35 @@ import { supabase } from "./supabase.js";
 
 export default async function handler(req,res){
 
-const { data,error } =
+try{
+
+const { data, error } =
 await supabase
 .from("deposits")
 .select("*")
-.eq(
-"status",
-"pending"
-);
+.eq("status","pending");
 
-res.json({
-status:true,
-data:data||[]
+if(error){
+
+return res.status(500).json({
+status:false,
+message:error.message
 });
+
+}
+
+return res.json({
+status:true,
+data:data || []
+});
+
+}catch(err){
+
+return res.status(500).json({
+status:false,
+message:err.message
+});
+
+}
 
 }
