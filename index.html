@@ -204,6 +204,34 @@ padding-top:100px;
 .hero-banner{padding:3rem 1.5rem}
 .hero-title{font-size:2rem}
 }
+
+.cards-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+}
+.food-card{
+width:100%;
+max-width:none;
+margin-bottom:0;
+}
+.food-card:hover{
+transform:translateY(-5px);
+box-shadow:var(--shadow-hover);
+}
+.card-image{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+@media(max-width:768px){
+.cards-grid{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+.card-image{height:130px;}
+}
+
 </style>
 </head>
 <body>
@@ -261,17 +289,25 @@ Solusi layanan bot WhatsApp dan layanan digital modern.
 </div>
 
 <div id="sewa">
-<div class="section-title">Paket Bot & Group</div>
 
+<div class="section-title">Paket Bot</div>
+<div class="cards-grid">
 <div class="food-card">
+<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
 <div class="card-details">
 <div class="menu-name">Paket Bot 1 Bulan</div>
 <p>Sewa bot WhatsApp selama 1 bulan.</p><br>
 <button class="btn-add">Rp 10.000</button>
 </div>
 </div>
+</div>
 
+<br><br>
+
+<div class="section-title">Group Premium</div>
+<div class="cards-grid">
 <div class="food-card">
+<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
 <div class="card-details">
 <div class="menu-name">Group Premium 1 Bulan</div>
 <p>Paket premium group selama 1 bulan.</p><br>
@@ -280,14 +316,18 @@ Solusi layanan bot WhatsApp dan layanan digital modern.
 </div>
 </div>
 
+</div>
+
 <div id="premium" style="display:none;">
 <div class="section-title">Premium User</div>
-
+<div class="cards-grid">
 <div class="food-card">
+<img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image">
 <div class="card-details">
 <div class="menu-name">Premium User 1 Bulan</div>
 <p>Premium user selama 1 bulan.</p><br>
 <button class="btn-add">Rp 5.000</button>
+</div>
 </div>
 </div>
 </div>
