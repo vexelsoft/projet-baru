@@ -14,16 +14,17 @@ message:"Method tidak diizinkan"
 }
 
 const {
+username,
 nominal,
 metode,
 bukti
 }=req.body;
 
-if(!nominal){
+if(!username || !nominal){
 
 return res.json({
 status:false,
-message:"Nominal kosong"
+message:"Username atau nominal kosong"
 });
 
 }
@@ -32,7 +33,8 @@ const { error } =
 await supabase
 .from("deposits")
 .insert([{
-nominal:Number(nominal),
+username: username,
+nominal: Number(nominal),
 metode,
 bukti,
 status:"pending"
