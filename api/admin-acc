@@ -1,52 +1,28 @@
-import fs from "fs";
-import path from "path";
+let deposits=[];
 
 export default function handler(req,res){
 
-const filePath=
-path.join(
-process.cwd(),
-"data",
-"deposits.json"
-);
-
-let deposits=
-JSON.parse(
-fs.readFileSync(
-filePath,
-"utf8"
-)
-);
-
 const {depositId}=req.body;
 
-const index=
-deposits.findIndex(
+const deposit=
+deposits.find(
 x=>x.id==depositId
 );
 
-if(index<0){
+if(!deposit){
 
 return res.json({
-status:false
+status:false,
+message:'Deposit tidak ditemukan'
 });
 
 }
 
-deposits[index]
-.status="success";
-
-fs.writeFileSync(
-filePath,
-JSON.stringify(
-deposits,
-null,
-2
-)
-);
+deposit.status='success';
 
 res.json({
-status:true
+status:true,
+message:'Deposit berhasil di ACC'
 });
 
 }
