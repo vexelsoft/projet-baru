@@ -4,31 +4,22 @@ export default async function handler(req,res){
 
 try{
 
-const { data, error } =
+const result =
 await supabase
 .from("deposits")
-.select("*")
-.eq("status","pending");
+.select("*");
 
-if(error){
-
-return res.status(500).json({
-status:false,
-message:error.message
-});
-
-}
-
-return res.json({
+return res.status(200).json({
 status:true,
-data:data || []
+debug:result
 });
 
 }catch(err){
 
 return res.status(500).json({
 status:false,
-message:err.message
+message:err.message,
+stack:err.stack
 });
 
 }
