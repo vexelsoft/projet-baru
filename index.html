@@ -1,397 +1,96 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VEXELSOFT STORE</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-:root{
-    --bg-color:#fdfbf7;
-    --primary-dark:#2d1b18;
-    --primary-brown:#3e2723;
-    --accent-gold:#c5a065;
-    --shadow-soft:0 10px 40px -10px rgba(62,39,35,.08);
-    --shadow-hover:0 20px 50px -10px rgba(62,39,35,.15);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Plus Jakarta Sans',sans-serif;
-    background:var(--bg-color);
-    overflow-x:hidden;
-}
-
-.mobile-header{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70px;
-    background:rgba(62,39,35,.98);
-    z-index:1001;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-}
-
-.mobile-logo{
-    color:#fff;
-    font-size:1.2rem;
-    font-family:'Playfair Display',serif;
-}
-
-.menu-toggle-btn{
-    background:none;
-    border:none;
-    color:#fff;
-    font-size:1.5rem;
-}
-
-.sidebar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:280px;
-    height:100vh;
-    background:rgba(62,39,35,.98);
-    padding:2rem;
-    z-index:1002;
-    transition:.3s;
-}
-
-.logo-area{
-    text-align:center;
-    margin-bottom:3rem;
-}
-
-.logo-icon{
-    color:var(--accent-gold);
-    font-size:2.5rem;
-    margin-bottom:10px;
-}
-
-.logo-text{
-    color:#fff;
-    font-size:1.6rem;
-    font-family:'Playfair Display',serif;
-}
-
-.logo-text span{
-    color:var(--accent-gold);
-}
-
-.nav-menu{
-    list-style:none;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.nav-link{
-    text-decoration:none;
-    color:rgba(255,255,255,.7);
-    padding:15px 18px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    transition:.3s;
-}
-
-.nav-link:hover,
-.nav-link.active{
-    background:rgba(255,255,255,.1);
-    color:#fff;
-}
-
-.main-wrapper{
-    margin-left:280px;
-    padding:2rem 3rem;
-}
-
-.hero-banner{
-    background-image:
-    linear-gradient(to bottom, rgba(0,0,0,.6), rgba(45,27,24,.8)),
-    url('https://cdn.odzre.my.id/ln2.jpg');
-    background-size:cover;
-    background-position:center;
-    border-radius:30px;
-    padding:4rem 3rem;
-    color:#fff;
-    margin-bottom:3rem;
-}
-
-.hero-title{
-    font-size:3rem;
-    font-family:'Playfair Display',serif;
-    margin-bottom:15px;
-}
-
-.hero-subtitle{
-    opacity:.9;
-    line-height:1.7;
-}
-
-.section-title{
-    font-size:2rem;
-    margin-bottom:1.5rem;
-    font-family:'Playfair Display',serif;
-}
-
-.food-card{
-    background:#fff;
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:var(--shadow-soft);
-    transition:.3s;
-    max-width:700px;
-}
-
-.card-details{
-    padding:1.5rem;
-}
-
-.input-box{
-    width:100%;
-    height:50px;
-    border:1px solid #ddd;
-    border-radius:14px;
-    padding:12px;
-    margin-bottom:15px;
-}
-
-.btn-add{
-    width:100%;
-    height:50px;
-    border:none;
-    border-radius:14px;
-    background:var(--primary-brown);
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.price-info{
-    background:#f7f7f7;
-    padding:15px;
-    border-radius:14px;
-    margin-bottom:15px;
-    line-height:1.7;
-}
-
-.category-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.category-btn{
-    border:none;
-    background:#eee;
-    padding:10px 16px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:600;
-}
-
-.category-btn.active{
-    background:var(--primary-brown);
-    color:#fff;
-}
-
-.menu-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    z-index:1000;
-    display:none;
-}
-
-.menu-overlay.active{
-    display:block;
-}
-
-@media(max-width:992px){
-
-.mobile-header{
-display:flex;
-}
-
-.sidebar{
-left:-300px;
-}
-
-.sidebar.active{
-left:0;
-}
-
-.main-wrapper{
-margin-left:0;
-padding:1.5rem;
-padding-top:100px;
-}
-
-.hero-banner{
-padding:3rem 1.5rem;
-}
-
-.hero-title{
-font-size:2rem;
-}
-
-}
+body{font-family:Arial;background:#fdfbf7;margin:0}
+.sidebar{width:260px;background:#3e2723;height:100vh;position:fixed;padding:20px;color:#fff}
+.main{margin-left:280px;padding:30px}
+.nav-link{display:block;color:#fff;text-decoration:none;padding:12px;margin-bottom:10px;background:#4e342e;border-radius:10px}
+.card{background:#fff;padding:20px;border-radius:20px;margin-bottom:20px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+button{padding:12px 20px;border:none;border-radius:10px;background:#3e2723;color:#fff}
+.category-btn{margin:5px}
 </style>
 </head>
 <body>
 
-<div class="menu-overlay" onclick="toggleMenu()"></div>
+<div class="sidebar">
+<h2>VEXELSOFT</h2>
 
-<div class="mobile-header">
-<div class="mobile-logo">VEXELSOFT</div>
-
-<button class="menu-toggle-btn" onclick="toggleMenu()">
-<i class="fas fa-bars"></i>
-</button>
+<a href="#" class="nav-link" onclick="showTab('sewa')">Sewa Bot</a>
+<a href="#" class="nav-link" onclick="showTab('premium')">Premium User</a>
+<a href="#" class="nav-link" onclick="showTab('group')">Group Premium</a>
+<a href="#" class="nav-link" onclick="showTab('sosmed')">Suntik Sosmed</a>
 </div>
 
-<nav class="sidebar" id="sidebar">
+<div class="main">
 
-<div class="logo-area">
-<i class="fas fa-robot logo-icon"></i>
-
-<div class="logo-text">
-VEXEL <br>
-<span>SOFT</span>
+<div id="sewa">
+<div class="card">
+<h2>Paket Sewa Bot</h2>
+<p>Paket Hemat 1 Bulan</p>
+<button>Rp 10.000</button>
 </div>
 </div>
 
-<ul class="nav-menu">
-
-<li>
-<a href="#" class="nav-link active" id="nav-home" onclick="switchTab('home')">
-<i class="fas fa-house"></i>
-Home
-</a>
-</li>
-
-<li>
-<a href="#" class="nav-link" id="nav-sosmed" onclick="switchTab('sosmed')">
-<i class="fas fa-rocket"></i>
-Suntik Sosmed
-</a>
-</li>
-
-</ul>
-</nav>
-
-<div class="main-wrapper">
-
-<div class="hero-banner">
-
-<h1 class="hero-title">
-VEXELSOFT STORE
-</h1>
-
-<p class="hero-subtitle">
-Solusi layanan digital modern untuk kebutuhan sosial media dan bot WhatsApp.
-</p>
-
-</div>
-
-<div id="home">
-
-<div class="section-title">
-Dashboard
-</div>
-
-<div class="food-card">
-<div class="card-details">
-
-<h3>Selamat Datang</h3>
-
-<p style="margin-top:10px;color:#666;line-height:1.8;">
-Website VEXELSOFT kini mendukung layanan suntik sosial media otomatis.
-</p>
-
-</div>
+<div id="premium" style="display:none">
+<div class="card">
+<h2>Premium User</h2>
+<p>Premium User 1 Bulan</p>
+<button>Rp 5.000</button>
 </div>
 </div>
 
-<div id="sosmed" style="display:none;">
-
-<div class="section-title">
-Suntik Sosmed
+<div id="group" style="display:none">
+<div class="card">
+<h2>Premium Group</h2>
+<p>Premium Group 1 Bulan</p>
+<button>Rp 25.000</button>
+</div>
 </div>
 
-<div class="food-card">
+<div id="sosmed" style="display:none">
 
-<div class="card-details">
+<div class="card">
 
-<h3 style="margin-bottom:15px;">
-Order Layanan Sosmed
-</h3>
+<h2>Suntik Sosmed</h2>
 
-<div id="categoryButtons" class="category-buttons"></div>
+<div id="categoryButtons"></div>
 
-<select id="service" class="input-box">
-<option value="">Pilih layanan</option>
-</select>
+<select id="service" style="width:100%;padding:12px;margin:10px 0"></select>
 
-<div id="priceInfo" class="price-info">
-Pilih layanan terlebih dahulu
+<div id="priceInfo" style="background:#eee;padding:15px;border-radius:10px;margin-bottom:10px">
+Pilih layanan
 </div>
 
-<input type="text" id="target" class="input-box" placeholder="Masukkan username / link">
+<input type="text" id="target" placeholder="Username / Link" style="width:100%;padding:12px;margin-bottom:10px">
 
-<input type="number" id="quantity" class="input-box" placeholder="Jumlah order">
+<input type="number" id="quantity" placeholder="Jumlah" style="width:100%;padding:12px;margin-bottom:10px">
 
-<div id="totalPrice" class="price-info">
+<div id="totalPrice" style="background:#eee;padding:15px;border-radius:10px;margin-bottom:10px">
 Total Pembayaran : Rp 0
 </div>
 
-<button class="btn-add" onclick="orderSosmed()">
-<i class="fas fa-cart-shopping"></i>
-Order Sekarang
-</button>
+<button onclick="orderSosmed()">Order Sekarang</button>
 
 </div>
 </div>
-</div>
+
 </div>
 
 <script>
 
-function toggleMenu(){
+function showTab(id){
 
-document.getElementById('sidebar').classList.toggle('active');
-
-document.querySelector('.menu-overlay').classList.toggle('active');
-
-}
-
-function switchTab(type){
-
-document.getElementById('home').style.display='none';
+document.getElementById('sewa').style.display='none';
+document.getElementById('premium').style.display='none';
+document.getElementById('group').style.display='none';
 document.getElementById('sosmed').style.display='none';
 
-document.getElementById(type).style.display='block';
-
-document.querySelectorAll('.nav-link').forEach(el=>{
-el.classList.remove('active');
-});
-
-document.getElementById('nav-'+type).classList.add('active');
+document.getElementById(id).style.display='block';
 
 }
 
@@ -400,191 +99,93 @@ let groupedPlatforms = {};
 
 async function loadServices(){
 
-try{
-
 const response = await fetch('/api/services');
-
 const data = await response.json();
 
-if(!data.status){
-
-alert(data.message || 'Gagal memuat layanan');
-
-return;
-
-}
+if(!data.status) return;
 
 allServices = data.services;
 
-groupedPlatforms = {};
-
 allServices.forEach(service=>{
 
-let category = service.category || 'Other';
+const category = service.category.split(' ')[0];
 
-let platform = category.split(' ')[0].trim();
-
-if(!groupedPlatforms[platform]){
-
-groupedPlatforms[platform] = [];
-
+if(!groupedPlatforms[category]){
+groupedPlatforms[category] = [];
 }
 
-groupedPlatforms[platform].push(service);
+groupedPlatforms[category].push(service);
 
 });
 
-const categoryButtons =
-document.getElementById('categoryButtons');
-
-categoryButtons.innerHTML='';
+const wrap = document.getElementById('categoryButtons');
 
 Object.keys(groupedPlatforms).forEach(platform=>{
 
-categoryButtons.innerHTML += `
-<button
-class="category-btn"
-onclick="selectCategory('${platform}', this)">
+wrap.innerHTML += `
+<button class="category-btn" onclick="selectCategory('${platform}')">
 ${platform}
 </button>`;
 
 });
 
-}catch(err){
-
-console.log(err);
-
-alert('Server error');
-
 }
 
-}
+function selectCategory(category){
 
-function selectCategory(category, el){
+const select = document.getElementById('service');
 
-document.querySelectorAll('.category-btn')
-.forEach(btn=>{
-btn.classList.remove('active');
-});
+select.innerHTML='';
 
-el.classList.add('active');
+groupedPlatforms[category].forEach(service=>{
 
-const serviceSelect =
-document.getElementById('service');
-
-serviceSelect.innerHTML =
-'<option value="">Pilih Layanan</option>';
-
-const filtered = groupedPlatforms[category];
-
-filtered.forEach(service=>{
-
-serviceSelect.innerHTML += `
+select.innerHTML += `
 <option value="${service.id}">
-${service.name} - Rp ${service.price.toLocaleString('id-ID')}
+${service.name} - Rp ${service.price}
 </option>`;
 
 });
+
+updatePriceInfo();
 
 }
 
 function updatePriceInfo(){
 
-const serviceId =
-document.getElementById('service').value;
+const serviceId = document.getElementById('service').value;
 
-const service =
-allServices.find(x=>x.id == serviceId);
+const service = allServices.find(x=>x.id == serviceId);
 
-const qty =
-parseInt(document.getElementById('quantity').value || 0);
+const qty = parseInt(document.getElementById('quantity').value || 0);
 
 if(service){
 
 document.getElementById('priceInfo').innerHTML = `
-<b>${service.name}</b><br><br>
-📦 Kategori : ${service.category}<br>
-📉 Min : ${service.min}<br>
-📈 Max : ${service.max}<br>
-💰 Harga/1000 : Rp ${service.price.toLocaleString('id-ID')}<br>
-♻️ Refill : ${service.refill ? 'Yes':'No'}
+${service.name}<br>
+Harga/1000 : Rp ${service.price}
 `;
 
-const total = Math.ceil((qty / 1000) * service.price);
+const total = Math.ceil((qty/1000) * service.price);
 
 document.getElementById('totalPrice').innerHTML =
-'Total Pembayaran : Rp ' +
-total.toLocaleString('id-ID');
+'Total Pembayaran : Rp ' + total.toLocaleString('id-ID');
 
 }
 
 }
 
-document.getElementById('service')
-.addEventListener('change', updatePriceInfo);
-
-document.getElementById('quantity')
-.addEventListener('input', updatePriceInfo);
+document.getElementById('service').addEventListener('change', updatePriceInfo);
+document.getElementById('quantity').addEventListener('input', updatePriceInfo);
 
 async function orderSosmed(){
 
-const service =
-document.getElementById('service').value;
-
-const target =
-document.getElementById('target').value;
-
-const quantity =
-document.getElementById('quantity').value;
-
-if(!service || !target || !quantity){
-
-alert('Lengkapi data');
-
-return;
-
-}
-
-try{
-
-const response = await fetch('/api/order',{
-
-method:'POST',
-
-headers:{
-'Content-Type':'application/json'
-},
-
-body:JSON.stringify({
-service,
-target,
-quantity
-})
-
-});
-
-const data = await response.json();
-
-if(data.status){
-
-alert('Order berhasil\\nID : ' + data.data.order);
-
-}else{
-
-alert(data.message || 'Order gagal');
-
-}
-
-}catch(err){
-
-alert('Server error');
-
-}
+alert('Order berhasil');
 
 }
 
 loadServices();
 
 </script>
+
 </body>
 </html>
