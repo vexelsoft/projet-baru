@@ -21,6 +21,12 @@ export default async function handler(req, res) {
             api_key
         );
 
+        /*
+        =========================
+        REQUEST API
+        =========================
+        */
+
         const response = await fetch(
 
             'https://fayupedia.id/api/services',
@@ -40,8 +46,17 @@ export default async function handler(req, res) {
 
         );
 
-        const data =
+        const result =
         await response.json();
+
+        /*
+        =========================
+        AMBIL ARRAY SERVICES
+        =========================
+        */
+
+        const rawServices =
+        result.data || result.services || result;
 
         /*
         =========================
@@ -49,35 +64,42 @@ export default async function handler(req, res) {
         =========================
         */
 
-        let services = [];
+        const services =
+        rawServices.map(service => {
 
-        if(Array.isArray(data)){
+            const originalPrice =
+            Number(
+                service.rate ||
+                service.price ||
+                0
+            );
 
-            services =
-            data.map(service => {
+            const sellPrice =
+            Math.ceil(
+                originalPrice * 1.2
+            );
 
-                const price =
-                Math.ceil(
-                    Number(service.price) * 1.2
-                );
+            return {
 
-                return {
+                id:
+                service.service ||
+                service.id,
 
-                    id: service.id,
+                name:
+                service.name,
 
-                    name: service.name,
+                min:
+                service.min,
 
-                    min: service.min,
+                max:
+                service.max,
 
-                    max: service.max,
+                price:
+                sellPrice
 
-                    price: price
+            };
 
-                };
-
-            });
-
-        }
+        });
 
         return res.status(200).json({
 
