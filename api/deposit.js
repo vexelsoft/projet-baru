@@ -1,29 +1,24 @@
 let deposits=[];
 
-export default async function handler(req,res){
+export default function handler(req,res){
 
 if(req.method!=="POST"){
-return res.status(405).json({
-status:false
-});
+return res.status(405).json({status:false});
 }
 
-const {userId,nominal,metode,bukti}=req.body;
+const {nominal,metode,bukti}=req.body;
 
-const deposit={
+deposits.push({
 id:Date.now(),
-userId,
-nominal:Number(nominal),
+nominal,
 metode,
 bukti,
-status:"pending"
-};
-
-deposits.push(deposit);
+status:'pending'
+});
 
 res.json({
 status:true,
-message:"Deposit menunggu ACC"
+message:'Menunggu ACC admin'
 });
 
 }
