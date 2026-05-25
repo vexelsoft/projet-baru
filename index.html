@@ -341,8 +341,8 @@ Solusi layanan bot WhatsApp dan layanan digital modern.
 
 <div class="section-title" style="margin-top:30px">Sewa & Premium Group</div>
 <div class="cards-grid">
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Group 1 Tahun','130000','Money 50JT + 15 Orang')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Tahun Group</div><p>Rp 130.000</p></div></div>
-<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Group 1 Bulan','25000','Money 5JT + 5 Orang')"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Bulan Group</div><p>Rp 25.000</p></div></div>
+<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Group 1 Tahun','130000','Money 50JT + 15 Orang',15)"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Tahun Group</div><p>Rp 130.000</p></div></div>
+<div class="food-card" style="cursor:pointer;width:100%" onclick="orderSewa('Group 1 Bulan','25000','Money 5JT + 5 Orang',5)"><img src="https://cdn.odzre.my.id/ln2.jpg" class="card-image"><div class="card-details"><div class="menu-name">1 Bulan Group</div><p>Rp 25.000</p></div></div>
 </div>
 
 </div>
@@ -598,34 +598,100 @@ alert('Server error');
 
 
 let produkDipilih='';
-let hargaDipilih=''; let deskripsiDipilih='';
+let hargaDipilih='';
+let deskripsiDipilih='';
+let jumlahNomorWajib=0;
 
-function orderSewa(nama,harga,desk){
-produkDipilih=nama;
-hargaDipilih=harga;deskripsiDipilih=desk;document.getElementById('deskProduk').innerHTML='📝 '+desk;
+function orderSewa(nama,harga,desk,jumlah=0){
+
+produkDipilih = nama;
+hargaDipilih = harga;
+deskripsiDipilih = desk;
+jumlahNomorWajib = jumlah;
+
+document.getElementById('deskProduk').innerHTML =
+'📝 ' + desk;
+
+const infoNomor =
+document.getElementById('infoNomor');
+
+if(jumlah > 0){
+
+infoNomor.innerHTML =
+`Wajib mengisi ${jumlah} nomor`;
+
+}else{
+
+infoNomor.innerHTML =
+'Paket ini tidak membutuhkan nomor tambahan';
+
+}
+
 document.getElementById('orderPopup').style.display='flex';
+
 }
 
 function kirimOrder(){
-const linkGroup=document.getElementById('groupLink').value;
+
+const linkGroup =
+document.getElementById('groupLink').value;
+
+const nomorText =
+document.getElementById('nomorList').value.trim();
 
 if(!linkGroup){
+
 alert('Link grup wajib diisi');
 return;
+
+}
+
+let daftarNomor = [];
+
+if(nomorText){
+
+daftarNomor = nomorText
+.split('
+')
+.map(x => x.trim())
+.filter(x => x);
+
+}
+
+if(jumlahNomorWajib > 0 &&
+daftarNomor.length != jumlahNomorWajib){
+
+alert(
+`Wajib mengisi ${jumlahNomorWajib} nomor`
+);
+
+return;
+
 }
 
 const nomor='6281234567890';
 
-const pesan=`Halo Admin VEXELSOFT
+const pesan = `Halo Admin VEXELSOFT
 
 📦 Produk: ${produkDipilih}
 💰 Harga: Rp ${Number(hargaDipilih).toLocaleString('id-ID')}
-🔗 Link Grup: ${linkGroup}`;
+🔗 Link Grup: ${linkGroup}
 
-window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,'_blank');
+📱 Daftar Nomor:
+${daftarNomor.join('
+')}
+`;
+
+window.open(
+`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,
+'_blank'
+);
 
 document.getElementById('orderPopup').style.display='none';
+
 document.getElementById('groupLink').value='';
+document.getElementById('nomorList').value='';
+
 }
 
 
@@ -647,6 +713,17 @@ loadServices();
 <div class="popup-title">🔗 Link Grup WhatsApp</div>
 <div id="deskProduk" class="popup-desc"></div><div class="popup-desc">Masukkan link grup terlebih dahulu untuk melanjutkan order</div>
 <input type="text" class="input-box" id="groupLink" placeholder="https://chat.whatsapp.com/...">
+
+<textarea
+class="input-box"
+id="nomorList"
+placeholder="Masukkan nomor satu per baris&#10;Contoh:&#10;628123456789&#10;628987654321"
+style="height:140px;resize:none"
+></textarea>
+
+<div id="infoNomor" class="popup-desc" style="margin-top:-5px">
+Kosongkan jika paket tidak membutuhkan nomor tambahan
+</div>
 <div style="display:flex;gap:10px;margin-top:10px">
 <button class="btn-add" style="background:#999" onclick="tutupPopup()">Back</button>
 <button class="btn-add" onclick="kirimOrder()">Buy</button>
