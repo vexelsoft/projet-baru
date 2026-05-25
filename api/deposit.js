@@ -17,9 +17,18 @@ const {
 nominal,
 metode,
 bukti
-} = req.body;
+}=req.body;
 
-const { data, error } =
+if(!nominal){
+
+return res.json({
+status:false,
+message:"Nominal kosong"
+});
+
+}
+
+const { error } =
 await supabase
 .from("deposits")
 .insert([{
@@ -38,9 +47,9 @@ message:error.message
 
 }
 
-return res.status(200).json({
+return res.json({
 status:true,
-message:"Deposit berhasil dikirim"
+message:"Deposit menunggu ACC"
 });
 
 }catch(err){
