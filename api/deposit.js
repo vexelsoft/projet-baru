@@ -1,22 +1,13 @@
-import fs from "fs";
-import path from "path";
+export default async function handler(req,res){
 
-export default function handler(req,res){
+if(req.method!=="POST"){
+return res.status(405).json({
+status:false,
+message:"Method tidak diizinkan"
+});
+}
 
-const filePath=
-path.join(process.cwd(),
-"data",
-"deposits.json");
-
-const deposits=
-JSON.parse(
-fs.readFileSync(
-filePath,
-"utf8"
-)
-);
-
-if(req.method==="POST"){
+try{
 
 const {
 nominal,
@@ -24,27 +15,25 @@ metode,
 bukti
 }=req.body;
 
-deposits.push({
-
-id:Date.now(),
-nominal,
-metode,
-bukti,
-status:"pending"
-
-});
-
-fs.writeFileSync(
-filePath,
-JSON.stringify(
-deposits,
-null,
-2
-)
-);
+if(!nominal || !bukti){
 
 return res.json({
-status:true
+status:false,
+message:"Data belum lengkap"
+});
+
+}
+
+return res.json({
+status:true,
+message:"Deposit berhasil dikirim"
+});
+
+}catch(err){
+
+return res.status(500).json({
+status:false,
+message:err.message
 });
 
 }
