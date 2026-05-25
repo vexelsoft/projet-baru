@@ -699,12 +699,24 @@ jumlahNomorWajib=jumlah;
 
 document.getElementById('deskProduk').innerHTML='📝 '+desk;
 
-if(document.getElementById('infoNomor')){
+const nomorBox =
+document.getElementById('nomorList');
 
-document.getElementById('infoNomor').innerHTML =
-jumlah > 0
-? 'Wajib mengisi ' + jumlah + ' nomor'
-: 'Kosongkan jika paket tidak membutuhkan nomor tambahan';
+const infoNomor =
+document.getElementById('infoNomor');
+
+if(jumlah > 0){
+
+nomorBox.style.display = 'block';
+infoNomor.style.display = 'block';
+
+infoNomor.innerHTML =
+'Wajib mengisi ' + jumlah + ' nomor';
+
+}else{
+
+nomorBox.style.display = 'none';
+infoNomor.style.display = 'none';
 
 }
 
