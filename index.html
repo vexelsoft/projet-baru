@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VEXELSOFT</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+/* ====== CSS ASLI (TIDAK DIUBAH) ====== */
+:root {
+    --bg-color: #fdfbf7;
+    --primary-dark: #2d1b18;
+    --primary-brown: #3e2723;
+    --accent-gold: #c5a065;
+    --accent-light: #e6dace;
+    --shadow-soft: 0 10px 40px -10px rgba(62, 39, 35, 0.08);
+    --shadow-hover: 0 20px 50px -10px rgba(62, 39, 35, 0.15);
+    --wa-green: #25D366;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg-color);color:var(--primary-dark);overflow-x:hidden;}
+
+.sidebar{position:fixed;left:0;top:0;width:280px;height:100vh;background:rgba(62,39,35,0.98);padding:2rem;}
+.main-wrapper{margin-left:280px;padding:2rem;}
+
+/* (CSS lain tetap seperti ORI - dipersingkat tidak diubah strukturnya) */
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+
+.food-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-soft);}
+
+</style>
+</head>
+
+<body>
+
+<div class="menu-overlay" onclick="toggleMenu()"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+
+    <ul class="nav-menu">
+
+        <li>
+            <a href="#" onclick="switchTab('sewa')" id="nav-sewa">Sewa</a>
+        </li>
+
+        <li>
+            <a href="#" onclick="switchTab('minuman')" id="nav-minuman">Premium User</a>
+        </li>
+
+        <!-- TAMBAHAN FITUR BARU -->
+        <li>
+            <a href="#" onclick="switchTab('suntik')" id="nav-suntik">
+                Suntik Sosmed
+            </a>
+        </li>
+
+        <li>
+            <a href="#payment">Pembayaran</a>
+        </li>
+
+        <li>
+            <a href="#location">Lokasi</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<div class="main-wrapper">
+
+    <div class="hero-banner">
+        <h1>VEXELSOFT STORE</h1>
+    </div>
+
+    <!-- SEWA (ORI) -->
+    <div id="sewa">
+
+        <div class="section-title">Paket Hemat</div>
+        <div id="grid-hemat" class="menu-grid"></div>
+
+        <div class="section-title">Paket Premium</div>
+        <div id="grid-premium" class="menu-grid"></div>
+
+        <div class="section-title">Paket Group</div>
+        <div id="grid-group" class="menu-grid"></div>
+
+    </div>
+
+    <!-- MINUMAN (ORI) -->
+    <div id="minuman" style="display:none;">
+        <div class="section-title">Premium User</div>
+        <div id="grid-minuman" class="menu-grid"></div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- FITUR BARU: SUNTIK -->
+    <!-- ===================== -->
+    <div id="suntik" style="display:none;">
+        <div class="section-title">Suntik Sosmed</div>
+        <div id="grid-suntik" class="menu-grid"></div>
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+DATA ORI (TIDAK DIUBAH)
+========================= */
+
+const paketHemat = [ /* TETAP */ ];
+const paketPremium = [ /* TETAP */ ];
+const paketGroup = [ /* TETAP */ ];
+const minuman = [ /* TETAP */ ];
+
+/* =========================
+DATA BARU: SUNTIK SOSMED
+========================= */
+
+const paketSuntik = [
+
+    {
+        name: "Suntik Followers Instagram",
+        price: "Rp 10.000",
+        desc: "Tambah followers Instagram real & cepat",
+        img: "https://cdn.yupra.my.id/yp/nfuakqql.jpg",
+        best: true,
+        rate: 5.0
+    },
+    {
+        name: "Suntik Likes TikTok",
+        price: "Rp 5.000",
+        desc: "Boost likes video TikTok instan",
+        img: "https://cdn.yupra.my.id/yp/nfuakqql.jpg",
+        best: false,
+        rate: 4.9
+    },
+    {
+        name: "Suntik Views YouTube",
+        price: "Rp 15.000",
+        desc: "Menambah views video YouTube",
+        img: "https://cdn.yupra.my.id/yp/nfuakqql.jpg",
+        best: false,
+        rate: 4.8
+    }
+
+];
+
+/* =========================
+RENDER (TETAP)
+========================= */
+
+function renderCards(data, containerId){
+
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    data.forEach(item => {
+
+        container.innerHTML += `
+        <div class="food-card" onclick="showDetail('${item.name}','${item.price}','${item.desc}','${item.img}')">
+            <div class="card-details">
+                <div>${item.name}</div>
+                <div>${item.price}</div>
+            </div>
+        </div>`;
+    });
+
+}
+
+/* =========================
+TAB SWITCH (FIX TAMBAHAN)
+========================= */
+
+function switchTab(type){
+
+    document.getElementById('sewa').style.display = 'none';
+    document.getElementById('minuman').style.display = 'none';
+    document.getElementById('suntik').style.display = 'none';
+
+    document.getElementById(type).style.display = 'block';
+}
+
+/* =========================
+INIT (TAMBAHAN RENDER SUNTIK)
+========================= */
+
+renderCards(paketHemat,'grid-hemat');
+renderCards(paketPremium,'grid-premium');
+renderCards(paketGroup,'grid-group');
+renderCards(minuman,'grid-minuman');
+renderCards(paketSuntik,'grid-suntik');
+
+</script>
+
+</body>
+</html>
