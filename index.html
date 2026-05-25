@@ -363,6 +363,10 @@ body{
                     Pilih layanan terlebih dahulu
                 </div>
 
+                <div id="totalPriceBox" class="price-info">
+                    💰 Total Pembayaran : Rp 0
+                </div>
+
                 <input type="text" id="target" class="input-box" placeholder="Masukkan username / link">
 
                 <input type="number" id="quantity" class="input-box" placeholder="Jumlah order">
@@ -506,6 +510,42 @@ function updatePriceInfo(){
     }
 }
 
+
+
+function updateTotalPrice(){
+
+    const serviceId =
+    document.getElementById('service').value;
+
+    const qty =
+    parseInt(
+        document.getElementById('quantity').value || 0
+    );
+
+    const service =
+    allServices.find(
+        x => x.id == serviceId
+    );
+
+    if(service){
+
+        const total =
+        Math.ceil(
+            (service.price / 1000) * qty
+        );
+
+        document.getElementById(
+            'totalPriceBox'
+        ).innerHTML =
+
+        '💰 Total Pembayaran : Rp ' +
+        total.toLocaleString('id-ID');
+
+    }
+
+}
+
+
 async function orderSosmed(){
 
     const service =
@@ -565,7 +605,15 @@ async function orderSosmed(){
 }
 
 document.getElementById('service')
-.addEventListener('change',updatePriceInfo);
+.addEventListener('change',()=>{
+
+    updatePriceInfo();
+    updateTotalPrice();
+
+});
+
+document.getElementById('quantity')
+.addEventListener('input',updateTotalPrice);
 
 loadServices();
 </script>
