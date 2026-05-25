@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Panel Admin Deposit</h2>
+
+<input
+id="depositId"
+placeholder="ID Deposit">
+
+<button onclick="acc()">
+ACC Deposit
+</button>
+
+<script>
+
+async function acc(){
+
+const depositId=
+document.getElementById(
+'depositId'
+).value;
+
+const response=
+await fetch(
+'/api/admin-acc',
+{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+depositId
+})
+}
+);
+
+const data=
+await response.json();
+
+alert(data.message);
+
+}
+
+</script>
+
+</body>
+</html>
