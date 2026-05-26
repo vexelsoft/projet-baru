@@ -1323,19 +1323,93 @@ alert(
 
 }
 
-async function login(){
-console.log("tombol login ditekan");
-const email =
+<script>
+
+async function register(){
+
+try{
+
+const email=
 document.getElementById(
 'email'
-).value;
+).value.trim();
 
-const password =
+const password=
 document.getElementById(
 'password'
-).value;
+).value.trim();
 
-const { data,error } =
+if(!email || !password){
+
+alert(
+"Email dan password wajib diisi"
+);
+
+return;
+
+}
+
+const { data,error }=
+await supabase.auth.signUp({
+
+email,
+password
+
+});
+
+if(error){
+
+alert(
+"Daftar gagal:\n"+
+error.message
+);
+
+return;
+
+}
+
+alert(
+"Pendaftaran berhasil"
+);
+
+}catch(e){
+
+alert(
+"Error:\n"+
+e.message
+);
+
+}
+
+}
+
+
+
+async function login(){
+
+try{
+
+const email=
+document.getElementById(
+'email'
+).value.trim();
+
+const password=
+document.getElementById(
+'password'
+).value.trim();
+
+if(!email || !password){
+
+alert(
+"Email dan password wajib diisi"
+);
+
+return;
+
+}
+
+const { data,error }=
 await supabase
 .auth
 .signInWithPassword({
@@ -1347,9 +1421,18 @@ password
 
 if(error){
 
-alert(error.message);
+alert(
+"Login gagal:\n"+
+error.message
+);
 
-}else{
+return;
+
+}
+
+alert(
+"Login berhasil"
+);
 
 document
 .getElementById(
@@ -1358,13 +1441,19 @@ document
 .style.display=
 'none';
 
-}
+}catch(e){
+
+alert(
+"Error:\n"+
+e.message
+);
 
 }
 
-supabase
-.auth
-.getSession()
+}
+
+
+supabase.auth.getSession()
 .then(({data})=>{
 
 if(data.session){
